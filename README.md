@@ -1,7 +1,7 @@
 # mod-4-group-project
 ### Models:
 
-Park: 
+####Park: 
   has_many :past_vists
   has_many :past_vistors, through: :past_vists, class_name: "User"
   
@@ -26,15 +26,15 @@ Park:
 
 }
 
-ParkImages
-  park: references,
-  title: string,
-  altText: string,
-  url: string,
-  caption: string,
-  credit: string,
+####ParkImages
+* park: references,
+* title: string,
+* altText: string,
+* url: string,
+* caption: string,
+* credit: string,
 
-User: 
+####User: 
   has_many :past_vists
   has_many :past_parks, through: :past_vists, class_name: "Park"
   
@@ -49,7 +49,7 @@ User:
   profilePicture: string
 }
 
-PastVisit:
+####PastVisit:
   belongs_to :user
   belongs_to :park
   
@@ -60,9 +60,9 @@ PastVisit:
   season: string,
   year: integer,
   
-user_images?
+####user_images?
 
-FutureVisit
+####FutureVisit
   belongs_to :user
   belongs_to :park
   
