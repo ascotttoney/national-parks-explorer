@@ -1,0 +1,2 @@
+class PastVisitsController < ApplicationController
+end
