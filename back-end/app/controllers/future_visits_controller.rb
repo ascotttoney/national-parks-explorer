@@ -1,0 +1,2 @@
+class FutureVisitsController < ApplicationController
+end
