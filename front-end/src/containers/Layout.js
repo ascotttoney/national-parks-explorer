@@ -3,8 +3,8 @@ import { Container } from 'react-bootstrap';
 
 export const Layout = (props) => {
   return (
-    <Container>
+    <React.Fragment>
       {props.children}
-    </Container>
+    </React.Fragment>
   )
 }
