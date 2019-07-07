@@ -3,6 +3,11 @@ class ParksController < ApplicationController
     park = Park.find(params[:id])
     render json: park, status: :ok
   end
+  
+  def index
+    parks = Park.all
+    render json: parks, status: :ok
+  end
 
   def images
     park = Park.find(params[:id])
