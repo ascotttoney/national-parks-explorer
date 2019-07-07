@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Park < ApplicationRecord
+  has_many :park_images
   has_many :past_visits
   has_many :past_vistors, class_name: 'User', through: :past_visits, source: :user
   has_many :future_visits
