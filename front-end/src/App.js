@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './containers/Navbar';
+import MainContainer from './containers/MainContainer';
 
 function App() {
   return (

@@ -21,7 +21,7 @@ while start < 500
     new_park = {}
     new_park[:latLong] = p['latLong']
     new_park[:name] = p['name']
-    new_park[:fullname] = p['fullname']
+    new_park[:fullname] = p['fullName']
     new_park[:parkCode] = p['parkCode']
     new_park[:states] = p['states']
     new_park[:designation] = p['designation']
