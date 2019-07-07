@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+3.times do
+  fullname = Faker::FunnyName.two_word_name.split(' ')
+  user = User.new(userName: Faker::Kpop.iii_groups,
+                  password: '12345',
+                  firstName: fullname[0],
+                  lastName: fullname[1],
+                  profilePicture: Faker::LoremFlickr.image)
+  user.save
+end
+
 limit = 100
 URL_BASE = "https://developer.nps.gov/api/v1/parks?fields=images&limit=#{limit}&start="
 start = 1
@@ -27,9 +30,60 @@ while start < 500
     new_park[:weatherInfo] = p['weatherInfo']
     park = Park.create(new_park)
     p['images'].each do |i|
-      new_image = { park_id: park.id, title: i['title'], altText: i['altText'], url: i['url'], caption: i['caption'], credit: i['credit'] }
+      new_image = { park_id: park.id,
+                    title: i['title'],
+                    altText: i['altText'],
+                    url: i['url'],
+                    caption: i['caption'],
+                    credit: i['credit'] }
       ParkImage.create(new_image)
     end
   end
   start += 100
+end
+
+users = [User.first, User.all[1], User.all[2], User.all[3]]
+parks = [Park.first, Park.all[1], Park.all[2], Park.all[3], Park.all[4]]
+
+i = 0
+while i <= 4
+  PastVisit.create(user: users[0],
+                   park: parks[i],
+                   title: Faker::Lorem.sentence,
+                   description: Faker::Lorem.paragraph_by_chars(256, false),
+                   season: 'summer',
+                   year: '2018')
+  i += 1
+end
+
+i = 0
+while i <= 4
+  FutureVisit.create(user: users[1],
+                     park: parks[i],
+                     title: Faker::Lorem.sentence,
+                     description: Faker::Lorem.paragraph_by_chars(256, false),
+                     season: 'summer',
+                     year: '2020')
+  i += 1
+end
+
+i = 0
+while i < 3
+  PastVisit.create(user: users[2],
+                   park: parks[i],
+                   title: Faker::Lorem.sentence,
+                   description: Faker::Lorem.paragraph_by_chars(256, false),
+                   season: 'summer',
+                   year: '2018')
+  i += 1
+end
+
+while i <= 4
+  FutureVisit.create(user: users[2],
+                     park: parks[i],
+                     title: Faker::Lorem.sentence,
+                     description: Faker::Lorem.paragraph_by_chars(256, false),
+                     season: 'summer',
+                     year: '2018')
+  i += 1
 end

@@ -2,8 +2,9 @@
 
 class User < ApplicationRecord
   has_many :past_visits
-  has_many :past_parks, through: :past_visits, class_name: 'Park'
+  has_many :past_parks, class_name: 'Park', through: :past_visits, source: :park
   has_many :future_visits
-  has_many :future_parks, through: :future_visits, class_name: 'Park'
-  
+  has_many :future_parks, class_name: 'Park', through: :future_visits, source: :park
+
+  has_secure_password
 end

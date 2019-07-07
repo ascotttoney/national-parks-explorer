@@ -1,2 +1,29 @@
+# frozen_string_literal: true
+
 class FutureVisitsController < ApplicationController
+  def show
+    visit = FutureVisit.find(params[:id])
+    render json: visit, status: :ok
+  end
+
+  def create
+    new_visit = FutureVisit.new(s_params)
+    if new_visit.save
+      render json: new_visit, status: :created
+    else
+      render json: new_visit.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    visit = FutureVisit.find(params[:id])
+    visit.destroy
+    render json: visit, status: :ok
+  end
+
+  private
+
+  def s_params
+    params.require(:FutureVisit).permit(:visitor_id, :park_id, :title, :desciption, :season, :year)
+  end
 end
