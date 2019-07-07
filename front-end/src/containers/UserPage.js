@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import UserProfile from '../components/user/UserProfile'
 
-export default class Navbar extends Component {
+export default class UserPage extends Component {
   render() {
     return (
       <div>

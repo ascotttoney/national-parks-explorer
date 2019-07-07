@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ParkDetails() {
+export const ParkDetails = () => {
   return (
     <div>
 

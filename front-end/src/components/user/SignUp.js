@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ParkCard = () => {
+export const SignUp = () => {
   return (
     <div>
 

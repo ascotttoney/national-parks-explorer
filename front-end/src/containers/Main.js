@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import ParksContainer from './ParksContainer'
+import ParksContainer from './Parks'
 
 
-export default class MainContainer extends Component {
+export default class Main extends Component {
   render() {
     return (
       <div>
