@@ -4,7 +4,7 @@ import Gallery from 'react-awesome-slider'
 import styles from '../galleryStyles.scss'
 
 export const ParkDetails = (props) => {
-  const { url, fullname, states, description, weatherInfo, latLong, imgs } = props.park
+  const { url, fullname, states, description, weatherInfo, imgs } = props.park
   return (
     <div className="container">
       <div className="page-header">
@@ -13,11 +13,10 @@ export const ParkDetails = (props) => {
       <Gallery cssModule={styles}>
         {imgs.map(img => <div data-src={img.url} />)}
       </Gallery>
-      <h4>Park State: {states}</h4>
+      <h5>Park State: {states}</h5>
       <p>{description}</p>
       <p>{weatherInfo}</p>
-      <p>{latLong}</p>
-      <Button type="button" className="btn btn-primary" onClick={props.backToParks}>Back To All Parks</Button>
+      <Button type="button" className="btn btn-primary" onClick={props.backToParks}>Back</Button>
     </div>
   )
 }

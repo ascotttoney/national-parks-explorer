@@ -62,7 +62,7 @@ export default class AllContainer extends Component {
           <Router>
             <Switch>
               <Route exact path="/" render={() => (
-                <Map parks={this.displayParks()} />
+                this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Map parks={this.displayParks()} showPark={this.showPark} />
               )} />
               <Route path="/parks" render={() => (
                 this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Parks parks={this.displayParks()} showPark={this.showPark} searchChange={this.searchChange} />
