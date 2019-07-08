@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PastVisitsController < ApplicationController
   def show
     visit = PastVisit.find(params[:id])
@@ -20,7 +22,8 @@ class PastVisitsController < ApplicationController
   end
 
   private
+
   def s_params
-    params.require(:PastVisit).permit(:visitor_id, :park_id, :title, :desciption, :season, :year)
+    params.require(:PastVisit).permit(:visitor_id, :park_id, :title, :description, :season, :year)
   end
 end
