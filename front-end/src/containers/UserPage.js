@@ -10,6 +10,7 @@ export default class UserPage extends Component {
           <Profile
             loggedIn={this.props.loggedIn}
             user={this.props.user}
+            handleLogout={this.props.handleLogout}
           />
             :
           <Login

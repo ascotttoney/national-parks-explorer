@@ -25,8 +25,8 @@ export default class Profile extends Component {
           <Card.Link href="#">Another Link</Card.Link>
         </Card.Body>
 
-        <Button variant="primary" type="submit">
-          Log Out (doesn't work)
+        <Button variant="primary" type="submit" onClick={this.props.handleLogout}>
+          Log Out
         </Button>
       </Card>
     )
