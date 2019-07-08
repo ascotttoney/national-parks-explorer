@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { NavigationBar } from './NavigationBar';
-import Main from './Main';
+import { Map } from '../components/Map';
 import Parks from './Parks'
 import Visit from './Visit';
 import UserPage from './UserPage'
@@ -62,7 +62,7 @@ export default class AllContainer extends Component {
           <Router>
             <Switch>
               <Route exact path="/" render={() => (
-                <Main parks={this.displayParks()} />
+                <Map parks={this.displayParks()} />
               )} />
               <Route path="/parks" render={() => (
                 this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Parks parks={this.displayParks()} showPark={this.showPark} searchChange={this.searchChange} />
