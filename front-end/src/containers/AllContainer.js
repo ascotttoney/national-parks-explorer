@@ -15,10 +15,28 @@ export default class AllContainer extends Component {
     parks: []
   }
 
-  componentDidMount() {
+  fetchImages(park) {
+    let newParks = this.state.parks
+    fetch(URL + `parks/${park.id}/images`)
+      .then(res => res.json())
+      .then(imgs => {
+        park.imgs = imgs
+        newParks.push(park)
+        this.setState({ parks: newParks })
+      })
+  }
+
+  async fetchParks() {
     fetch(URL + 'parks')
       .then(res => res.json())
-      .then(data => this.setState({ parks: data }))
+      .then(parks => parks.forEach(park => {
+        this.fetchImages(park)
+      }))
+
+  }
+
+  componentDidMount() {
+    this.fetchParks()
   }
 
   render() {
