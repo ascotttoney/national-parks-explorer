@@ -16,19 +16,19 @@ const Styles = styled.div`
   }
 `;
 
-export const NavigationBar = ()=> (
+export const NavigationBar = () => (
   <Styles>
     <Navbar expand="sm">
-    <Navbar.Brand href="/">Hotlanta</Navbar.Brand>
+      <Navbar.Brand href="/">Hotlanta</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" >
         <Nav className='ml-auto'>
-          <Nav.Item><Nav.Link href="/">Main</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link href="/">Map</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link href="/parks">Parks</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link href="/visits">Visits</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
         </Nav>
-        </Navbar.Collapse>
+      </Navbar.Collapse>
     </Navbar>
   </Styles>
 )
