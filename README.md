@@ -1,5 +1,4 @@
 # National Parks Navigator
-#### Module 4 Group Project
 ### Models:
 
 #### Park: 
