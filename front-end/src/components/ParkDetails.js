@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import Gallery from 'react-awesome-slider'
-// import AwsSliderStyles from 'react-awesome-slider/src/styles.scss'
 import styles from '../galleryStyles.scss'
 
 export const ParkDetails = (props) => {

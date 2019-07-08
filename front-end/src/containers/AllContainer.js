@@ -14,11 +14,17 @@ const URL = `http://localhost:3000/`
 export default class AllContainer extends Component {
   state = {
     parks: [],
-    showPark: false
+    showPark: false,
+    search: ""
   }
 
+  searchChange = (e) => e.target.value.length > 2 ? this.setState({ search: e.target.value.toLowerCase() }) : this.setState({ search: e.target.value })
   showPark = (park) => this.setState({ showPark: park })
   backToParks = () => this.setState({ showPark: false })
+  filterPark = (park) => {
+    const search = this.state.search
+    return park.fullname.toLowerCase().includes(search) || park.description.toLowerCase().includes(search) || park.weatherInfo.toLowerCase().includes(search) || park.states.includes(search)
+  }
 
   fetchImages(park) {
     let newParks = this.state.parks
@@ -37,14 +43,16 @@ export default class AllContainer extends Component {
       .then(parks => parks.forEach(park => {
         this.fetchImages(park)
       }))
+  }
 
+  displayParks = () => {
+    let parks = this.state.parks
+    return parks.filter(park => this.filterPark(park))
   }
 
   componentDidMount() {
     this.fetchParks()
   }
-
-
 
   render() {
     return (
@@ -55,7 +63,7 @@ export default class AllContainer extends Component {
             <Switch>
               <Route exact path="/" component={Main} />
               <Route path="/parks" render={(props) => (
-                this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Parks {...props} parks={this.state.parks} showPark={this.showPark} />
+                this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Parks {...props} parks={this.displayParks()} showPark={this.showPark} searchChange={this.searchChange} />
               )} />
               <Route path="/visits" component={Visit} />
               <Route path="/login" component={UserPage} />
