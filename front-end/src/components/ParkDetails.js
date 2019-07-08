@@ -10,17 +10,15 @@ export const ParkDetails = (props) => {
       <div className="page-header">
         <h1 className="text-center"><a href={url}>{fullname}</a></h1>
       </div>
-      <div className="border border-secondary p-5">
-        <Gallery cssModule={styles}>
-          {imgs.map(img => <div data-src={img.url} />)}
-        </Gallery>
-      </div>
-      <div className="p-1 bg-gradient-primary">
+      <Gallery cssModule={styles}>
+        {imgs.map(img => <div data-src={img.url} />)}
+      </Gallery>
+      <div className="pt-4 text-dark">
         <h5>Park State: {states}</h5>
         <p>{description}</p>
         <p>{weatherInfo}</p>
         <Button type="button" className="btn btn-primary" onClick={props.backToParks}>Back</Button>
       </div >
-    </div>
+    </div >
   )
 }

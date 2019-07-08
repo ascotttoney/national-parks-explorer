@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ParkCard } from '../components/ParkCard'
+import ParkCard from '../components/ParkCard'
 
 export default class ParksContainer extends Component {
   render() {
