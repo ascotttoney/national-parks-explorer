@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ParksContainer from './Parks'
+import { Map } from '../components/Map'
 
 
 export default class Main extends Component {
@@ -7,7 +7,7 @@ export default class Main extends Component {
     return (
       <div>
         <h1>
-          Welcome To Tinder for National Parks! Click on parks to start swiping...
+          <Map parks={this.props.parks} />
         </h1>
       </div>
     )

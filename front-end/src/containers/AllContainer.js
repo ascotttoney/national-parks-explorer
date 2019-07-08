@@ -61,9 +61,11 @@ export default class AllContainer extends Component {
         <Layout>
           <Router>
             <Switch>
-              <Route exact path="/" component={Main} />
-              <Route path="/parks" render={(props) => (
-                this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Parks {...props} parks={this.displayParks()} showPark={this.showPark} searchChange={this.searchChange} />
+              <Route exact path="/" render={() => (
+                <Main parks={this.displayParks()} />
+              )} />
+              <Route path="/parks" render={() => (
+                this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Parks parks={this.displayParks()} showPark={this.showPark} searchChange={this.searchChange} />
               )} />
               <Route path="/visits" component={Visit} />
               <Route path="/login" component={UserPage} />
