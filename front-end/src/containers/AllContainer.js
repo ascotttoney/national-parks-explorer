@@ -77,27 +77,14 @@ export default class AllContainer extends Component {
 
     fetch('http://localhost:3000/login', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({user: userObject})
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.message) {
-        alert("Sorry, your username or password is incorrect.")
-        this.setState({errors: data.message}, () => console.log("errors", this.state.errors))
-      }
-      else {
-        this.setState({user: data.user, loggedIn: true})
-        localStorage.setItem('token', data.jwt)
-        window.history.pushState({url: "/profile"}, "", "/profile")
-        this.forceUpdate()
-      }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: userObject })
     })
       .then(res => res.json())
       .then(data => {
-        if (data.errors) {
+        if (data.message) {
           alert("Sorry, your username or password is incorrect.")
-          this.setState({ errors: data.errors }, () => console.log("errors", this.state.errors))
+          this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
         }
         else {
           this.setState({ user: data.user, loggedIn: true })
@@ -113,9 +100,9 @@ export default class AllContainer extends Component {
     // e.preventDefault()
 
     localStorage.removeItem('token')
-    this.setState({loggedIn: false})
-    window.history.pushState({url:'/'}, "", "/")
-    this.forceUpdate()
+    this.setState({ loggedIn: false })
+    // window.history.pushState({ url: '/' }, "", "/")
+    // this.forceUpdate()
   }
 
 
@@ -131,7 +118,7 @@ export default class AllContainer extends Component {
                   <ParkDetails
                     park={this.state.showPark}
                     backToParks={this.backToParks} /> :
-                    <Map parks={this.displayParks()}
+                  <Map parks={this.displayParks()}
                     showPark={this.showPark} />
               )} />
 
