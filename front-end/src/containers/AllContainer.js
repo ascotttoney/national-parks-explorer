@@ -64,7 +64,7 @@ export default class AllContainer extends Component {
   }
 
   handleUserInputChange = (key, value) => {
-    this.setState({user: {...this.state.user, [key]: value}}, () => console.log(this.state.user))
+    this.setState({ user: { ...this.state.user, [key]: value } }, () => console.log(this.state.user))
   }
 
   handleLogin = (e) => {
@@ -93,6 +93,19 @@ export default class AllContainer extends Component {
         this.forceUpdate()
       }
     })
+      .then(res => res.json())
+      .then(data => {
+        if (data.errors) {
+          alert("Sorry, your username or password is incorrect.")
+          this.setState({ errors: data.errors }, () => console.log("errors", this.state.errors))
+        }
+        else {
+          this.setState({ user: data.user, loggedIn: true })
+          localStorage.setItem('token', data.jwt)
+          window.history.pushState({ url: "/profile" }, "", "/profile")
+          this.forceUpdate()
+        }
+      })
     e.target.parentElement.reset()
   }
 
@@ -109,7 +122,7 @@ export default class AllContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavigationBar loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
+        <NavigationBar searchChange={this.searchChange} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
         <Layout>
           <Router>
             <Switch>
@@ -122,20 +135,20 @@ export default class AllContainer extends Component {
                     showPark={this.showPark} />
               )} />
 
-              <Route path="/parks" render={(props) => (
+              <Route path="/parks" render={() => (
                 this.state.showPark ?
                   <ParkDetails
                     park={this.state.showPark}
                     backToParks={this.backToParks} /> :
-                  <Parks {...props}
+                  <Parks
                     parks={this.displayParks()}
                     showPark={this.showPark} />
               )} />
 
               <Route path="/visits" component={Visit} />
 
-              <Route path="/login" render={(props) => (
-                <UserPage {...props}
+              <Route path="/login" render={() => (
+                <UserPage
                   user={this.state.user}
                   handleUserInputChange={this.handleUserInputChange}
                   loggedIn={this.state.loggedIn}
