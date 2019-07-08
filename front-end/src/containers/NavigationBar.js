@@ -20,13 +20,17 @@ const Styles = styled.div`
 export const NavigationBar = (props) => (
   <Styles>
     <Navbar expand="sm">
-      <Navbar.Brand href="/">Hotlanta</Navbar.Brand>
+      <Navbar.Brand href="/">NATIONAL PARKS EXPLORER</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" >
         <Nav className='mr-auto'>
           <Nav.Item><Nav.Link href="/">Map</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link href="/parks">Parks</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link href="/visits">Visits</Nav.Link></Nav.Item>
+          {props.loggedIn ?
+            <Nav.Item><Nav.Link href="/" onClick={props.handleLogout}>Logout</Nav.Link></Nav.Item> :
+            <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
+          }
         </Nav>
       </Navbar.Collapse>
       <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>

@@ -70,8 +70,6 @@ export default class AllContainer extends Component {
   handleLogin = (e) => {
     e.preventDefault()
 
-    console.log('user before fetch:', this.state.user)
-
     let userObject = {
       userName: this.state.user.userName,
       password: this.state.user.password
@@ -79,8 +77,21 @@ export default class AllContainer extends Component {
 
     fetch('http://localhost:3000/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user: userObject })
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({user: userObject})
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.message) {
+        alert("Sorry, your username or password is incorrect.")
+        this.setState({errors: data.message}, () => console.log("errors", this.state.errors))
+      }
+      else {
+        this.setState({user: data.user, loggedIn: true})
+        localStorage.setItem('token', data.jwt)
+        window.history.pushState({url: "/profile"}, "", "/profile")
+        this.forceUpdate()
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -98,10 +109,20 @@ export default class AllContainer extends Component {
     e.target.parentElement.reset()
   }
 
+  handleLogout = (e) => {
+    // e.preventDefault()
+
+    localStorage.removeItem('token')
+    this.setState({loggedIn: false})
+    window.history.pushState({url:'/'}, "", "/")
+    this.forceUpdate()
+  }
+
+
   render() {
     return (
       <React.Fragment>
-        <NavigationBar searchChange={this.searchChange} />
+        <NavigationBar searchChange={this.searchChange} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
         <Layout>
           <Router>
             <Switch>
@@ -110,7 +131,7 @@ export default class AllContainer extends Component {
                   <ParkDetails
                     park={this.state.showPark}
                     backToParks={this.backToParks} /> :
-                  <Map parks={this.displayParks()}
+                    <Map parks={this.displayParks()}
                     showPark={this.showPark} />
               )} />
 
@@ -131,7 +152,8 @@ export default class AllContainer extends Component {
                   user={this.state.user}
                   handleUserInputChange={this.handleUserInputChange}
                   loggedIn={this.state.loggedIn}
-                  handleLogin={this.handleLogin} />
+                  handleLogin={this.handleLogin}
+                  handleLogout={this.handleLogout} />
               )} />
 
               <Route component={NoMatch} />

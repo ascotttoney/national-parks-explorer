@@ -1,26 +1,26 @@
-# mod-4-group-project
+# National Parks Navigator
 ### Models:
 
 #### Park: 
 ##### Relationships
-  * has_many :past_vists
-  * has_many :past_vistors, through: :past_vists, class_name: "User"
+* has_many :past_vists
+* has_many :past_vistors, through: :past_vists, class_name: "User"
   
-  * has_many :future_vists
-  * has_many :future_vistors, through: :future_vists, class_name: "User"
+* has_many :future_vists
+* has_many :future_vistors, through: :future_vists, class_name: "User"
 ##### Columns
-  * latLong: string,
-  * name: string,
-  * fullname: string,
-  * parkCode: string,
-  * states: string,
-  * designation: string,
-  * url: string,
-  * description: text,
-  * weatherInfo: string
+* latLong: string,
+* name: string,
+* fullname: string,
+* parkCode: string,
+* states: string,
+* designation: string,
+* url: string,
+* description: text,
+* weatherInfo: string
   
-  * operatingHours?
-  * entranceFees?
+* operatingHours?
+* entranceFees?
 
 #### ParkImages
 ##### Columns
