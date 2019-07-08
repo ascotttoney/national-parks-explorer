@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class ParksController < ApplicationController
   def show
     park = Park.find(params[:id])
     render json: park, status: :ok
   end
-  
+
   def index
-    parks = Park.all
+    parks = Park.national_parks
     render json: parks, status: :ok
   end
 
@@ -33,5 +35,4 @@ class ParksController < ApplicationController
     park = Park.find(params[:id])
     render json: park.future_visitors, status: :ok
   end
-
 end

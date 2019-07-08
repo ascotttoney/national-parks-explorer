@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Map = () => {
+export const UserProfile = () => {
   return (
     <div>
 

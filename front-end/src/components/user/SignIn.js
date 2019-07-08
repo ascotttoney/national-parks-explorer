@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function UserProfile() {
+export const SignIn = () => {
   return (
     <div>
 
