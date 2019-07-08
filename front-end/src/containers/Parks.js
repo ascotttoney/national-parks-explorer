@@ -8,7 +8,7 @@ export default class ParksContainer extends Component {
         <h1>Parks</h1>
         <div className="row">
           {this.props.parks.map(park => {
-            return <ParkCard key={park.id} park={park} />
+            return <ParkCard key={park.id} park={park} showPark={this.props.showPark} />
           })}
         </div>
       </div>

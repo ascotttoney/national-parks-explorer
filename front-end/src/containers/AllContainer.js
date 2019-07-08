@@ -7,13 +7,18 @@ import Visit from './Visit';
 import UserPage from './UserPage'
 import { NoMatch } from '../components/NoMatch'
 import { Layout } from './Layout';
+import { ParkDetails } from '../components/ParkDetails';
 
 const URL = `http://localhost:3000/`
 
 export default class AllContainer extends Component {
   state = {
-    parks: []
+    parks: [],
+    showPark: false
   }
+
+  showPark = (park) => this.setState({ showPark: park })
+  backToParks = () => this.setState({ showPark: false })
 
   fetchImages(park) {
     let newParks = this.state.parks
@@ -39,6 +44,8 @@ export default class AllContainer extends Component {
     this.fetchParks()
   }
 
+
+
   render() {
     return (
       <React.Fragment>
@@ -47,7 +54,9 @@ export default class AllContainer extends Component {
           <Router>
             <Switch>
               <Route exact path="/" component={Main} />
-              <Route path="/parks" render={(props) => <Parks {...props} parks={this.state.parks} />} />
+              <Route path="/parks" render={(props) => (
+                this.state.showPark ? <ParkDetails park={this.state.showPark} backToParks={this.backToParks} /> : <Parks {...props} parks={this.state.parks} showPark={this.showPark} />
+              )} />
               <Route path="/visits" component={Visit} />
               <Route path="/login" component={UserPage} />
               <Route component={NoMatch} />
