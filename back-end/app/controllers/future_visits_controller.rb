@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class FutureVisitsController < ApplicationController
+
+  def index 
+    visits = FutureVisit.all
+    render json: visits, status: :ok
+  end
+
   def show
     visit = FutureVisit.find(params[:id])
     render json: visit, status: :ok

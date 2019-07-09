@@ -25,7 +25,11 @@ export const NavigationBar = (props) => (
       <Navbar.Collapse id="basic-navbar-nav" >
         <Nav className='mr-auto'>
           <Nav.Item><Nav.Link href="/parks">Parks</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link href="/visits">Visits</Nav.Link></Nav.Item>
+
+          <Nav.Item><Nav.Link href="/future_visits">Future Visit</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link href="/past_visits">Past Visit</Nav.Link></Nav.Item>
+       
+
         </Nav>
       </Navbar.Collapse>
       {props.loggedIn ?
