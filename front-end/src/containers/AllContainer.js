@@ -19,7 +19,6 @@ export default class AllContainer extends Component {
     pastVisits: [],
     futureVisits: [],
     search: "",
-    loggedIn: false,
     user: {
       userName: "",
       password: "",
@@ -27,7 +26,16 @@ export default class AllContainer extends Component {
       lastName: "",
       profilePicture: "",
       errors: ""
-    }
+    },
+    newUser: {
+      userName: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      profilePicture: "",
+      errors: ""
+    },
+    signUpForm: false
   }
 
   searchChange = (e) => e.target.value.length > 2 ? this.setState({ search: e.target.value.toLowerCase() }) : this.setState({ search: e.target.value })
@@ -55,7 +63,6 @@ export default class AllContainer extends Component {
       .then(parks =>
         parks.forEach(park => {
           this.fetchImages(park)
-
         })
       )
   }
@@ -65,15 +72,13 @@ export default class AllContainer extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({ pastVisits: data })
-      }
-      )
+      })
 
     fetch(URL + 'future_visits')
       .then(res => res.json())
-      .then(data => { this.setState({ futureVisits: data }) }
-      )
+      .then(data => { this.setState({ futureVisits: data })
+      })
   }
-
 
   displayParks = () => {
     let parks = this.state.parks
@@ -85,8 +90,11 @@ export default class AllContainer extends Component {
     this.fetchVisits()
   }
 
+
+  // LOGIN & LOGOUT //
+
   handleUserInputChange = (key, value) => {
-    this.setState({ user: { ...this.state.user, [key]: value } }, () => console.log(this.state.user))
+    this.setState({user: {...this.state.user, [key]: value}})
   }
 
   handleLogin = (e) => {
@@ -97,7 +105,7 @@ export default class AllContainer extends Component {
       password: this.state.user.password
     }
 
-    fetch('http://localhost:3000/login', {
+    fetch(URL + 'login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user: userObject })
@@ -109,7 +117,7 @@ export default class AllContainer extends Component {
           this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
         }
         else {
-          this.setState({ user: data.user, loggedIn: true })
+          this.setState({user: data.user})
           localStorage.setItem('token', data.jwt)
           window.history.pushState({ url: "/profile" }, "", "/profile")
           this.forceUpdate()
@@ -118,21 +126,52 @@ export default class AllContainer extends Component {
     e.target.parentElement.reset()
   }
 
-  handleLogout = (e) => {
-    // e.preventDefault()
-
+  handleLogout = () => {
     localStorage.removeItem('token')
-    this.setState({ loggedIn: false })
-    // window.history.pushState({ url: '/' }, "", "/")
-    // this.forceUpdate()
   }
 
 
+  // NEW USER STUFF //
+
+  handleNewUserInput = (key, value) => {
+    this.setState({newUser: {...this.state.newUser, [key]: value}})
+  }
+
+  handleCreateUser = (e) => {
+    e.preventDefault()
+
+    fetch(URL + 'users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: this.state.newUser })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.message) {
+        alert("Sorry, your username or password is incorrect.")
+        this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
+      }
+      else {
+        this.setState({user: data.user})
+        localStorage.setItem('token', data.jwt)
+        window.history.pushState({ url: "/profile" }, "", "/profile")
+        this.forceUpdate()
+      }
+    })
+  }
+
+  showSignUpForm = (e) => {
+    e.preventDefault()
+    this.state.signUpForm ? this.setState({signUpForm: false}) : this.setState({signUpForm: true})
+  }
+
+
+  // RENDER & ROUTES //
 
   render() {
     return (
       <React.Fragment>
-        <NavigationBar searchChange={this.searchChange} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
+        <NavigationBar searchChange={this.searchChange} handleLogout={this.handleLogout} />
         <Layout>
           <Router>
             <Switch>
@@ -162,9 +201,12 @@ export default class AllContainer extends Component {
                 <UserPage
                   user={this.state.user}
                   handleUserInputChange={this.handleUserInputChange}
-                  loggedIn={this.state.loggedIn}
                   handleLogin={this.handleLogin}
-                  handleLogout={this.handleLogout} />
+                  handleLogout={this.handleLogout}
+                  handleCreateUser={this.handleCreateUser}
+                  handleNewUserInput={this.handleNewUserInput}
+                  showSignUpForm={this.showSignUpForm}
+                  signUpForm={this.state.signUpForm} />
               )} />
 
 
