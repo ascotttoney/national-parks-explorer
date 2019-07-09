@@ -42,8 +42,8 @@ while start < 500
   start += 100
 end
 
-users = [User.first, User.all[1], User.all[2], User.all[3]]
-parks = [Park.first, Park.all[12], Park.all[8], Park.all[91], Park.all[139]]
+users = [User.first, User.all[1], User.all[2]]
+parks = [Park.all[80], Park.all[11], Park.all[7], Park.all[90], Park.all[138]]
 
 i = 0
 while i <= 4
