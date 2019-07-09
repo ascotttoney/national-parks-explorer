@@ -5,9 +5,9 @@ export default class Profile extends Component {
   render() {
     return(
       <Card style={{width: '70%'}}>
-        <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+        <Card.Img variant="top" src={this.props.user.profilePicture} />
         <Card.Body>
-          <Card.Title>Hey, {this.props.user.firstName}!</Card.Title>
+          <Card.Title>Hello, {this.props.user.firstName}!</Card.Title>
           <Card.Text>
             Some quick example text to build on the card title and make up the bulk of
             the card's content.

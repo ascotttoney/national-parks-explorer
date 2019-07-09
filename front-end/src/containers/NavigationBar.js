@@ -1,7 +1,8 @@
 import React from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
 import styled from 'styled-components'
-import { GiDandelionFlower } from 'react-icons/gi';
+import { GiDandelionFlower } from 'react-icons/gi'
+import Profile from './Profile'
 
 const Styles = styled.div`
   .navbar{
@@ -29,13 +30,19 @@ export const NavigationBar = (props) => (
           <Nav.Item><Nav.Link href="/past_visits">Past Visit</Nav.Link></Nav.Item>
         </Nav>
       </Navbar.Collapse>
-      {props.loggedIn ?
-        <Nav.Item><Nav.Link onClick={props.handleLogout}>Logout</Nav.Link></Nav.Item> :
-        <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
+
+      {localStorage.token ?
+        <Nav className="ml-auto">
+          <Nav.Item><Nav.Link href="/profile">Profile</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link onClick={props.handleLogout}>Logout</Nav.Link></Nav.Item>
+          <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
+        </Nav>
+          :
+        <Nav className="ml-auto">
+          <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
+          <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
+        </Nav>
       }
-      <Nav className="ml-auto">
-        <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
-      </Nav>
     </Navbar>
   </Styles>
 )
