@@ -10,6 +10,8 @@ import { Layout } from './Layout';
 import { ParkDetails } from '../components/ParkDetails';
 import { Map } from '../components/Map';
 import MyModal from '../components/MyModal'
+import Profile from './Profile'
+import Login from './Login';
 
 const URL = `http://localhost:3000/`
 
@@ -88,7 +90,8 @@ export default class AllContainer extends Component {
 
     fetch(URL + 'future_visits')
       .then(res => res.json())
-      .then(data => { this.setState({ futureVisits: data })
+      .then(data => {
+        this.setState({ futureVisits: data })
       })
   }
 
@@ -106,7 +109,7 @@ export default class AllContainer extends Component {
   // LOGIN & LOGOUT //
 
   handleUserInputChange = (key, value) => {
-    this.setState({user: {...this.state.user, [key]: value}})
+    this.setState({ user: { ...this.state.user, [key]: value } })
   }
 
   handleLogin = (e) => {
@@ -129,7 +132,7 @@ export default class AllContainer extends Component {
           this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
         }
         else {
-          this.setState({user: data.user})
+          this.setState({ user: data.user })
           localStorage.setItem('token', data.jwt)
           window.history.pushState({ url: "/profile" }, "", "/profile")
           this.forceUpdate()
@@ -146,7 +149,7 @@ export default class AllContainer extends Component {
   // NEW USER STUFF //
 
   handleNewUserInput = (key, value) => {
-    this.setState({newUser: {...this.state.newUser, [key]: value}})
+    this.setState({ newUser: { ...this.state.newUser, [key]: value } })
   }
 
   handleCreateUser = (e) => {
@@ -157,24 +160,24 @@ export default class AllContainer extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user: this.state.newUser })
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.message) {
-        alert("Sorry, your username or password is incorrect.")
-        this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
-      }
-      else {
-        this.setState({user: data.user})
-        localStorage.setItem('token', data.jwt)
-        window.history.pushState({ url: "/profile" }, "", "/profile")
-        this.forceUpdate()
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message) {
+          alert("Sorry, your username or password is incorrect.")
+          this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
+        }
+        else {
+          this.setState({ user: data.user })
+          localStorage.setItem('token', data.jwt)
+          window.history.pushState({ url: "/profile" }, "", "/profile")
+          this.forceUpdate()
+        }
+      })
   }
 
   showSignUpForm = (e) => {
     e.preventDefault()
-    this.state.signUpForm ? this.setState({signUpForm: false}) : this.setState({signUpForm: true})
+    this.state.signUpForm ? this.setState({ signUpForm: false }) : this.setState({ signUpForm: true })
   }
 
 
@@ -195,7 +198,6 @@ export default class AllContainer extends Component {
           loggedIn={this.state.loggedIn}
           handleLogout={this.handleLogout}
         />
-        <NavigationBar searchChange={this.searchChange} handleLogout={this.handleLogout} />
         <Layout>
           <Router>
             <Switch>
@@ -229,12 +231,12 @@ export default class AllContainer extends Component {
                 this.state.pastVisits.map(eachVisit =>  <PastVisit eachVisit={eachVisit} park={this.state.parks.filter(park => park.id === eachVisit.id )} />)
               }} /> */}
 
-              <Route path="/past_visits" render={() => 
+              <Route path="/past_visits" render={() =>
                 (<PastVisit pastVisits={this.state.pastVisits} />
                 )} />
 
-              <Route path="/future_visits" render={() =>         (<FutureVisit futureVisits={this.state.futureVisits}
-               />)} />
+              <Route path="/future_visits" render={() => (<FutureVisit futureVisits={this.state.futureVisits}
+              />)} />
 
               <Route path="/login" render={() => (
                 <UserPage
@@ -247,7 +249,21 @@ export default class AllContainer extends Component {
                   showSignUpForm={this.showSignUpForm}
                   signUpForm={this.state.signUpForm} />
               )} />
-
+              <Route path="/profile" render={() => (
+                localStorage.token ?
+                  <Profile user={this.state.user} />
+                  :
+                  <Login
+                    handleUserInputChange={this.handleUserInputChange}
+                    handleLogin={this.handleLogin}
+                    handleLogout={this.handleLogout}
+                    handleCreateUser={this.handleCreateUser}
+                    handleNewUserInput={this.handleNewUserInput}
+                    showSignUpForm={this.showSignUpForm}
+                    signUpForm={this.state.signUpForm}
+                  />
+              )}
+              />
               <Route component={NoMatch} />
             </Switch>
           </Router>
