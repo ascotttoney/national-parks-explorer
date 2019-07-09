@@ -19,7 +19,6 @@ export default class AllContainer extends Component {
     pastVisits: [],
     futureVisits: [],
     search: "",
-    loggedIn: false,
     user: {
       userName: "",
       password: "",
@@ -118,7 +117,7 @@ export default class AllContainer extends Component {
           this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
         }
         else {
-          this.setState({ user: data.user, loggedIn: true })
+          this.setState({user: data.user})
           localStorage.setItem('token', data.jwt)
           window.history.pushState({ url: "/profile" }, "", "/profile")
           this.forceUpdate()
@@ -129,7 +128,6 @@ export default class AllContainer extends Component {
 
   handleLogout = () => {
     localStorage.removeItem('token')
-    this.setState({ loggedIn: false })
   }
 
 
@@ -154,7 +152,7 @@ export default class AllContainer extends Component {
         this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
       }
       else {
-        this.setState({ user: data.user, loggedIn: true })
+        this.setState({user: data.user})
         localStorage.setItem('token', data.jwt)
         window.history.pushState({ url: "/profile" }, "", "/profile")
         this.forceUpdate()
@@ -173,7 +171,7 @@ export default class AllContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavigationBar searchChange={this.searchChange} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
+        <NavigationBar searchChange={this.searchChange} handleLogout={this.handleLogout} />
         <Layout>
           <Router>
             <Switch>
@@ -203,7 +201,6 @@ export default class AllContainer extends Component {
                 <UserPage
                   user={this.state.user}
                   handleUserInputChange={this.handleUserInputChange}
-                  loggedIn={this.state.loggedIn}
                   handleLogin={this.handleLogin}
                   handleLogout={this.handleLogout}
                   handleCreateUser={this.handleCreateUser}
