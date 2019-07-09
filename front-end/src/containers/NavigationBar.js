@@ -1,8 +1,7 @@
 import React from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
 import styled from 'styled-components'
-import { MDBFormInline } from "mdbreact";
-import { Link } from 'react-router'
+import { GiDandelionFlower } from 'react-icons/gi';
 
 const Styles = styled.div`
   .navbar{
@@ -21,7 +20,7 @@ const Styles = styled.div`
 export const NavigationBar = (props) => (
   <Styles>
     <Navbar expand="sm">
-      <Navbar.Brand href="/">NATIONAL PARKS EXPLORER</Navbar.Brand>
+      <Navbar.Brand href="/"><GiDandelionFlower /> NATIONAL PARKS EXPLORER</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" >
         <Nav className='mr-auto'>
@@ -34,9 +33,7 @@ export const NavigationBar = (props) => (
         <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
       }
       <Nav className="ml-auto">
-        <MDBFormInline>
-          <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
-        </MDBFormInline>
+        <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
       </Nav>
     </Navbar>
   </Styles>
