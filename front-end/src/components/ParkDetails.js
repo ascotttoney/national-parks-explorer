@@ -8,10 +8,10 @@ export const ParkDetails = (props) => {
   return (
     <div className="container">
       <div className="page-header">
-        <h1 className="text-center"><a href={url}>{fullname}</a></h1>
+        <h1 className="text-center"><a href={url} target="_blank" rel="noopener noreferrer">{fullname}</a></h1>
       </div>
-      <Gallery cssModule={styles}>
-        {imgs.map(img => <div data-src={img.url} />)}
+      <Gallery cssModule={styles} >
+        {imgs.map(img => <div key={img.id} data-src={img.url} />)}
       </Gallery>
       <div className="pt-4 text-dark">
         <h5>Park State: {states}</h5>
