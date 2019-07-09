@@ -33,13 +33,13 @@ export const NavigationBar = (props) => (
 
       {localStorage.token ?
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="/profile">Profile</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link onClick={props.handleLogout}>Logout</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link name='profile' href="/profile">Profile</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link name='logout' onClick={props.handleLogout}>Logout</Nav.Link></Nav.Item>
           <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
         </Nav>
           :
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link name='login' href="/login">Login</Nav.Link></Nav.Item>
           <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
         </Nav>
       }

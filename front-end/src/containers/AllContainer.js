@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { NavigationBar } from './NavigationBar';
 import Parks from './Parks'
 import { PastVisit } from './PastVisit';
@@ -17,6 +17,7 @@ const URL = `http://localhost:3000/`
 
 export default class AllContainer extends Component {
   state = {
+    redirect: "",
     form: {
       user_id: '',
       park_id: '',
@@ -52,12 +53,17 @@ export default class AllContainer extends Component {
 
   modalShow = () => this.setState({ modalShow: true })
   modalClose = () => this.setState({ modalShow: false })
-  searchChange = (e) => e.target.value.length > 2 ? this.setState({ search: e.target.value.toLowerCase() }) : this.setState({ search: e.target.value })
+  searchChange = (e) => e.target.value.length > 2 ?
+    this.setState({ search: e.target.value.toLowerCase() }) :
+    this.setState({ search: e.target.value })
   showPark = (park) => this.setState({ showPark: park })
   backToParks = () => this.setState({ showPark: false })
   filterPark = (park) => {
     const search = this.state.search
-    return park.fullname.toLowerCase().includes(search) || park.description.toLowerCase().includes(search) || park.weatherInfo.toLowerCase().includes(search) || park.states.includes(search)
+    return park.fullname.toLowerCase().includes(search) ||
+      park.description.toLowerCase().includes(search) ||
+      park.weatherInfo.toLowerCase().includes(search) ||
+      park.states.includes(search)
   }
 
   fetchImages(park) {
@@ -103,7 +109,18 @@ export default class AllContainer extends Component {
   componentDidMount() {
     this.fetchParks()
     this.fetchVisits()
+    localStorage.token ? this.checkCurrentUser() : this.setState({ redirect: <Redirect to='/login' /> })
   }
+
+  checkCurrentUser = () => {
+    let token = localStorage.token
+    fetch(`http://localhost:3000/profile`, {
+      method: 'GET',
+      headers: { Authorization: token }
+    })
+    .then(res => res.json())
+    .then(data => this.setState({user: data.user})
+  )}
 
 
   // LOGIN & LOGOUT //
@@ -132,7 +149,7 @@ export default class AllContainer extends Component {
           this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
         }
         else {
-          this.setState({ user: data.user })
+          this.setState({ user: data.user, redirect: <Redirect to='/profile' /> })
           localStorage.setItem('token', data.jwt)
           window.history.pushState({ url: "/profile" }, "", "/profile")
           this.forceUpdate()
@@ -143,6 +160,7 @@ export default class AllContainer extends Component {
 
   handleLogout = () => {
     localStorage.removeItem('token')
+    this.setState({ redirect: <Redirect to='/login' /> })
   }
 
 
@@ -167,7 +185,7 @@ export default class AllContainer extends Component {
           this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
         }
         else {
-          this.setState({ user: data.user })
+          this.setState({ user: data.user, signUpForm: false, redirect: <Redirect to='/profile' /> })
           localStorage.setItem('token', data.jwt)
           window.history.pushState({ url: "/profile" }, "", "/profile")
           this.forceUpdate()
@@ -184,35 +202,33 @@ export default class AllContainer extends Component {
   // RENDER & ROUTES //
 
   render() {
-
-
     return (
       <React.Fragment>
         <MyModal
           form={this.state.form}
           show={this.state.modalShow}
-          onHide={this.modalClose}
-        />
+          onHide={this.modalClose} />
+
         <NavigationBar
           searchChange={this.searchChange}
           loggedIn={this.state.loggedIn}
-          handleLogout={this.handleLogout}
-        />
+          handleLogout={this.handleLogout} />
+
         <Layout>
           <Router>
+            {this.state.redirect}
+
             <Switch>
               <Route exact path="/" render={() => (
                 this.state.showPark ?
                   <ParkDetails
                     park={this.state.showPark}
                     backToParks={this.backToParks}
-                    modalShow={this.modalShow}
-                  /> :
+                    modalShow={this.modalShow} /> :
                   <Map
                     parks={this.displayParks()}
                     showPark={this.showPark}
-                    modalShow={this.modalShow}
-                  />
+                    modalShow={this.modalShow} />
               )} />
 
               <Route path="/parks" render={() => (
@@ -223,24 +239,19 @@ export default class AllContainer extends Component {
                   <Parks
                     parks={this.displayParks()}
                     showPark={this.showPark}
-                    modalShow={this.modalShow}
-                  />
+                    modalShow={this.modalShow} />
               )} />
 
-              {/* <Route path="/past_visits" render={() => { return 
-                this.state.pastVisits.map(eachVisit =>  <PastVisit eachVisit={eachVisit} park={this.state.parks.filter(park => park.id === eachVisit.id )} />)
-              }} /> */}
+              <Route path="/past_visits" render={() => (
+                <PastVisit pastVisits={this.state.pastVisits} />
+              )} />
 
-              <Route path="/past_visits" render={() =>
-                (<PastVisit pastVisits={this.state.pastVisits} />
-                )} />
-
-              <Route path="/future_visits" render={() => (<FutureVisit futureVisits={this.state.futureVisits}
-              />)} />
+              <Route path="/future_visits" render={() => (
+                <FutureVisit futureVisits={this.state.futureVisits} />
+              )} />
 
               <Route path="/login" render={() => (
-                <UserPage
-                  user={this.state.user}
+                <Login
                   handleUserInputChange={this.handleUserInputChange}
                   handleLogin={this.handleLogin}
                   handleLogout={this.handleLogout}
@@ -249,21 +260,13 @@ export default class AllContainer extends Component {
                   showSignUpForm={this.showSignUpForm}
                   signUpForm={this.state.signUpForm} />
               )} />
+
               <Route path="/profile" render={() => (
-                localStorage.token ?
-                  <Profile user={this.state.user} />
-                  :
-                  <Login
-                    handleUserInputChange={this.handleUserInputChange}
-                    handleLogin={this.handleLogin}
-                    handleLogout={this.handleLogout}
-                    handleCreateUser={this.handleCreateUser}
-                    handleNewUserInput={this.handleNewUserInput}
-                    showSignUpForm={this.showSignUpForm}
-                    signUpForm={this.state.signUpForm}
-                  />
-              )}
-              />
+                <Profile
+                  user={this.state.user}
+                  handleLogout={this.handleLogout} />
+              )} />
+
               <Route component={NoMatch} />
             </Switch>
           </Router>

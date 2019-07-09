@@ -5,7 +5,7 @@ export default class Profile extends Component {
   render() {
     return(
       <Card style={{width: '70%'}}>
-        <Card.Img variant="top" src={this.props.user.profilePicture} />
+        <Card.Img style={{width: '300px'}} variant="top" src={this.props.user.profilePicture} />
         <Card.Body>
           <Card.Title>Hello, {this.props.user.firstName}!</Card.Title>
           <Card.Text>
