@@ -1,15 +1,17 @@
 import React from 'react'
+import { GiDirectionSign } from 'react-icons/gi'
 
-export const ParkCard = (props) => {
-  console.log(props)
-  return (
-    
-    <div className="card" style={{ width: '18rem' }} onClick={e => props.showPark(props.park)}>
-      <img className="card-img-top" src={props.park.imgs[0].url} alt={props.park.imgs[0].caption} />
-      <div className="card-body">
-        <h5 className="card-title">{props.park.name}</h5>
-        <p className="card-text">{props.park.description}</p>
+
+export default class ParkCard extends React.PureComponent {
+  render() {
+    const img = this.props.park.imgs[Math.floor(Math.random() * this.props.park.imgs.length)]
+    return (
+      <div className="m-1 card" style={{ width: '25rem' }} onClick={e => this.props.showPark(this.props.park)}>
+        <img className="p-2 card-img-top" style={{ maxHeight: '35rem', borderRadius: "10px" }} src={img.url} alt={img.caption} />
+        <div className="card-body">
+          <h5 className="card-title"><GiDirectionSign /> {this.props.park.name}</h5>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }

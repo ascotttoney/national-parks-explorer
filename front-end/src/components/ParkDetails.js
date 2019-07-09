@@ -1,24 +1,26 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import Gallery from 'react-awesome-slider'
-// import AwsSliderStyles from 'react-awesome-slider/src/styles.scss'
 import styles from '../galleryStyles.scss'
+import { FaMap } from 'react-icons/fa'
+import { GiPineTree } from 'react-icons/gi'
 
 export const ParkDetails = (props) => {
-  const { url, fullname, states, description, weatherInfo, latLong, imgs } = props.park
+  const { url, fullname, states, description, weatherInfo, imgs } = props.park
   return (
     <div className="container">
       <div className="page-header">
-        <h1><a href={url}>{fullname}</a></h1>
+        <h1 className="text-center"><GiPineTree /><a href={url} target="_blank" rel="noopener noreferrer"> {fullname}</a> <GiPineTree /></h1>
       </div>
-      <Gallery cssModule={styles}>
-        {imgs.map(img => <div data-src={img.url} />)}
+      <Gallery cssModule={styles} >
+        {imgs.map(img => <div key={img.id} data-src={img.url} />)}
       </Gallery>
-      <h4>Park State: {states}</h4>
-      <p>{description}</p>
-      <p>{weatherInfo}</p>
-      <p>{latLong}</p>
-      <Button type="button" className="btn btn-primary" onClick={props.backToParks}>Back To All Parks</Button>
-    </div>
+      <div className="pt-4 text-dark">
+        <h6><FaMap /> {states}</h6>
+        <p>{description}</p>
+        <p>{weatherInfo}</p>
+        <Button type="button" className="btn btn-primary" onClick={props.backToParks}>Back</Button>
+      </div >
+    </div >
   )
 }
