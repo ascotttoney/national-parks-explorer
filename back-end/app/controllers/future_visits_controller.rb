@@ -4,7 +4,7 @@ class FutureVisitsController < ApplicationController
 
   def index 
     visits = FutureVisit.all
-    render json: visits, status: :ok
+    render json: visits.to_json(include: [:park, :user]), status: :ok
   end
 
   def show
