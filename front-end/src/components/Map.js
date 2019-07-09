@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactMap, { Marker, Popup } from 'react-map-gl';
 import 'mapbox-gl/src/css/mapbox-gl.css'
-import { ParkCard } from './ParkCard'
+import ParkCard from './ParkCard'
 
 export const Map = (props) => {
   const [viewport, setViewport] = useState({
@@ -9,7 +9,7 @@ export const Map = (props) => {
     longitude: -98.935240,
     zoom: 4,
     width: '100vw',
-    height: '90vh'
+    height: '100vh'
   })
   const [selected, setSelected] = useState(null)
 
