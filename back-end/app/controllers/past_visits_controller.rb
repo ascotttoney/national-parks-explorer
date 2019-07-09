@@ -1,4 +1,10 @@
 class PastVisitsController < ApplicationController
+
+  def index 
+    visits = PastVisit.all
+    render json: visits, status: :ok
+  end
+
   def show
     visit = PastVisit.find(params[:id])
     render json: visit, status: :ok
