@@ -46,7 +46,8 @@ export const Map = (props) => {
       <ReactMap
         {...viewport}
         mapboxApiAccessToken="pk.eyJ1IjoiaGFueHUyNyIsImEiOiJjanh1ajF5bTIxNXZhM2xyczF4cXN4ZjJqIn0.058kHvghPXmU2LOnp_9bwA"
-        mapStyle='mapbox://styles/hanxu27/cjxujyxc99bwq1cs1kk4duz8a'
+        // mapStyle='mapbox://styles/hanxu27/cjxujyxc99bwq1cs1kk4duz8a'
+        mapStyle="mapbox://styles/hanxu27/cjxvx303m18ce1cqhd5dg3029"
         onViewportChange={viewport => setViewport(viewport)}
       >
         {props.parks.map(parkMarker)}

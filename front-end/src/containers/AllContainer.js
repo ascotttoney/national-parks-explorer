@@ -167,7 +167,6 @@ export default class AllContainer extends Component {
                   handleLogout={this.handleLogout} />
               )} />
 
-
               <Route component={NoMatch} />
             </Switch>
           </Router>
