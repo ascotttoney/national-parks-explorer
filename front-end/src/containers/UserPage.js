@@ -18,6 +18,10 @@ export default class UserPage extends Component {
             user={this.props.user}
             handleUserInputChange={this.props.handleUserInputChange}
             handleLogin={this.props.handleLogin}
+            handleCreateUser={this.props.handleCreateUser}
+            handleNewUserInput={this.props.handleNewUserInput}
+            showSignUpForm={this.props.showSignUpForm}
+            signUpForm={this.props.signUpForm}
           />
         }
       </div>
