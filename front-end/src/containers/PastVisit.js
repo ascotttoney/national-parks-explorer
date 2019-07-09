@@ -1,7 +1,6 @@
-
 import React, { Component } from 'react'
 import { ParkCard } from '../components/ParkCard';
-import {Route} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 export const PastVisit = (props)=>{
   // console.log(props)
@@ -29,5 +28,3 @@ export const PastVisit = (props)=>{
       </div>
     )
 }
-
-// 

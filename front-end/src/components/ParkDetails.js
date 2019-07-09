@@ -20,6 +20,8 @@ export const ParkDetails = (props) => {
         <p>{description}</p>
         <p>{weatherInfo}</p>
         <Button type="button" className="btn btn-primary" onClick={props.backToParks}>Back</Button>
+        <Button type="button" className="btn btn-success m-1 float-right" onClick={e => props.modalShow()}>Log Past Trip</Button>
+        <Button type="button" className="btn btn-warning m-1 float-right" onClick={e => props.modalShow()}> Plan New Trip</Button>
       </div >
     </div >
   )

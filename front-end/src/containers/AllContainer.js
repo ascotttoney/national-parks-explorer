@@ -9,11 +9,21 @@ import { NoMatch } from '../components/NoMatch'
 import { Layout } from './Layout';
 import { ParkDetails } from '../components/ParkDetails';
 import { Map } from '../components/Map';
+import MyModal from '../components/MyModal'
 
 const URL = `http://localhost:3000/`
 
 export default class AllContainer extends Component {
   state = {
+    form: {
+      user_id: '',
+      park_id: '',
+      title: '',
+      description: '',
+      season: '',
+      year: ''
+    },
+    modalShow: false,
     parks: [],
     showPark: false,
     pastVisits: [],
@@ -38,6 +48,8 @@ export default class AllContainer extends Component {
     signUpForm: false
   }
 
+  modalShow = () => this.setState({ modalShow: true })
+  modalClose = () => this.setState({ modalShow: false })
   searchChange = (e) => e.target.value.length > 2 ? this.setState({ search: e.target.value.toLowerCase() }) : this.setState({ search: e.target.value })
   showPark = (park) => this.setState({ showPark: park })
   backToParks = () => this.setState({ showPark: false })
@@ -169,8 +181,20 @@ export default class AllContainer extends Component {
   // RENDER & ROUTES //
 
   render() {
+
+
     return (
       <React.Fragment>
+        <MyModal
+          form={this.state.form}
+          show={this.state.modalShow}
+          onHide={this.modalClose}
+        />
+        <NavigationBar
+          searchChange={this.searchChange}
+          loggedIn={this.state.loggedIn}
+          handleLogout={this.handleLogout}
+        />
         <NavigationBar searchChange={this.searchChange} handleLogout={this.handleLogout} />
         <Layout>
           <Router>
@@ -179,9 +203,14 @@ export default class AllContainer extends Component {
                 this.state.showPark ?
                   <ParkDetails
                     park={this.state.showPark}
-                    backToParks={this.backToParks} /> :
-                  <Map parks={this.displayParks()}
-                    showPark={this.showPark} />
+                    backToParks={this.backToParks}
+                    modalShow={this.modalShow}
+                  /> :
+                  <Map
+                    parks={this.displayParks()}
+                    showPark={this.showPark}
+                    modalShow={this.modalShow}
+                  />
               )} />
 
               <Route path="/parks" render={() => (
@@ -191,7 +220,9 @@ export default class AllContainer extends Component {
                     backToParks={this.backToParks} /> :
                   <Parks
                     parks={this.displayParks()}
-                    showPark={this.showPark} />
+                    showPark={this.showPark}
+                    modalShow={this.modalShow}
+                  />
               )} />
 
               {/* <Route path="/past_visits" render={() => { return 
@@ -202,7 +233,7 @@ export default class AllContainer extends Component {
                 (<PastVisit pastVisits={this.state.pastVisits} />
                 )} />
 
-              <Route path="/future_visits" render={() =>            (<FutureVisit futureVisits={this.state.futureVisits}
+              <Route path="/future_visits" render={() =>         (<FutureVisit futureVisits={this.state.futureVisits}
                />)} />
 
               <Route path="/login" render={() => (
@@ -216,7 +247,6 @@ export default class AllContainer extends Component {
                   showSignUpForm={this.showSignUpForm}
                   signUpForm={this.state.signUpForm} />
               )} />
-
 
               <Route component={NoMatch} />
             </Switch>
