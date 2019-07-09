@@ -194,8 +194,16 @@ export default class AllContainer extends Component {
                     showPark={this.showPark} />
               )} />
 
-              <Route path="/past_visits" render={() => (<PastVisit pastVisits={this.state.pastVisits} parks={this.state.parks} />)} />
-              <Route path="/future_visits" render={() => (<FutureVisit futureVisits={this.state.futureVisits} />)} />
+              {/* <Route path="/past_visits" render={() => { return 
+                this.state.pastVisits.map(eachVisit =>  <PastVisit eachVisit={eachVisit} park={this.state.parks.filter(park => park.id === eachVisit.id )} />)
+              }} /> */}
+
+              <Route path="/past_visits" render={() => 
+                (<PastVisit pastVisits={this.state.pastVisits} />
+                )} />
+
+              <Route path="/future_visits" render={() =>            (<FutureVisit futureVisits={this.state.futureVisits}
+               />)} />
 
               <Route path="/login" render={() => (
                 <UserPage
