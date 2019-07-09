@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { NavigationBar } from './NavigationBar';
 import Parks from './Parks'
-import {PastVisit} from './PastVisit';
+import { PastVisit } from './PastVisit';
 import FutureVisit from './FutureVisit';
 import UserPage from './UserPage'
 import { NoMatch } from '../components/NoMatch'
@@ -16,10 +16,8 @@ export default class AllContainer extends Component {
   state = {
     parks: [],
     showPark: false,
-
     pastVisits: [],
     futureVisits: [],
-
     search: "",
     loggedIn: false,
     user: {
@@ -30,7 +28,6 @@ export default class AllContainer extends Component {
       profilePicture: "",
       errors: ""
     }
-
   }
 
   searchChange = (e) => e.target.value.length > 2 ? this.setState({ search: e.target.value.toLowerCase() }) : this.setState({ search: e.target.value })
@@ -55,35 +52,32 @@ export default class AllContainer extends Component {
   async fetchParks() {
     fetch(URL + 'parks')
       .then(res => res.json())
-      .then(parks => 
+      .then(parks =>
         parks.forEach(park => {
-        this.fetchImages(park)
+          this.fetchImages(park)
 
-      })
+        })
       )
   }
 
-  fetchVisits(){
+  fetchVisits() {
     fetch(URL + 'past_visits')
-    .then(res => res.json())
-    .then(data =>   
-    { 
-      this.setState({ pastVisits: data })
-    }
-    )
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ pastVisits: data })
+      }
+      )
 
     fetch(URL + 'future_visits')
-    .then(res => res.json())
-    .then(data => 
-    {this.setState({ futureVisits: data })}
-    )
-      }))
+      .then(res => res.json())
+      .then(data => { this.setState({ futureVisits: data }) }
+      )
   }
+
 
   displayParks = () => {
     let parks = this.state.parks
     return parks.filter(park => this.filterPark(park))
-
   }
 
   componentDidMount() {
@@ -136,7 +130,6 @@ export default class AllContainer extends Component {
 
 
   render() {
-    // console.log(pastVisits)
     return (
       <React.Fragment>
         <NavigationBar searchChange={this.searchChange} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
@@ -162,12 +155,8 @@ export default class AllContainer extends Component {
                     showPark={this.showPark} />
               )} />
 
-              <Route path="/past_visits" render={() => ( <PastVisit pastVisits={this.state.pastVisits} parks={this.state.parks} />)} />
-              <Route path="/future_visits" render={() => ( <FutureVisit futureVisits={this.state.futureVisits} />)} />
-              <Route path="/login" component={UserPage} />
-
-
-              <Route path="/visits" component={Visit} />
+              <Route path="/past_visits" render={() => (<PastVisit pastVisits={this.state.pastVisits} parks={this.state.parks} />)} />
+              <Route path="/future_visits" render={() => (<FutureVisit futureVisits={this.state.futureVisits} />)} />
 
               <Route path="/login" render={() => (
                 <UserPage
