@@ -17,14 +17,7 @@ const URL = `http://localhost:3000/`
 
 export default class AllContainer extends Component {
   state = {
-    form: {
-      user_id: '',
-      park_id: '',
-      title: '',
-      description: '',
-      season: '',
-      year: ''
-    },
+    newVisitState: '',
     modalShow: false,
     parks: [],
     showPark: false,
@@ -60,6 +53,16 @@ export default class AllContainer extends Component {
     return park.fullname.toLowerCase().includes(search) || park.description.toLowerCase().includes(search) || park.weatherInfo.toLowerCase().includes(search) || park.states.includes(search)
   }
 
+  planNewVisit = () => {
+    this.setState({ newVisitState: "New" })
+    this.modalShow()
+  }
+
+  logPastVisit = () => {
+    this.setState({ newVisitState: "Past" })
+    this.modalShow()
+  }
+
   fetchImages(park) {
     let newParks = this.state.parks
     fetch(URL + `parks/${park.id}/images`)
@@ -71,7 +74,7 @@ export default class AllContainer extends Component {
       })
   }
 
-  async fetchParks() {
+  fetchParks() {
     fetch(URL + 'parks')
       .then(res => res.json())
       .then(parks =>
@@ -104,7 +107,6 @@ export default class AllContainer extends Component {
     this.fetchParks()
     this.fetchVisits()
   }
-
 
   // LOGIN & LOGOUT //
 
@@ -184,14 +186,12 @@ export default class AllContainer extends Component {
   // RENDER & ROUTES //
 
   render() {
-
-
     return (
       <React.Fragment>
         <MyModal
-          form={this.state.form}
           show={this.state.modalShow}
           onHide={this.modalClose}
+          newVisitState={this.state.newVisitState}
         />
         <NavigationBar
           searchChange={this.searchChange}
@@ -206,12 +206,14 @@ export default class AllContainer extends Component {
                   <ParkDetails
                     park={this.state.showPark}
                     backToParks={this.backToParks}
-                    modalShow={this.modalShow}
+                    planNewVisit={this.planNewVisit}
+                    logPastVisit={this.logPastVisit}
                   /> :
                   <Map
                     parks={this.displayParks()}
                     showPark={this.showPark}
-                    modalShow={this.modalShow}
+                    planNewVisit={this.planNewVisit}
+                    logPastVisit={this.logPastVisit}
                   />
               )} />
 
@@ -223,20 +225,18 @@ export default class AllContainer extends Component {
                   <Parks
                     parks={this.displayParks()}
                     showPark={this.showPark}
-                    modalShow={this.modalShow}
+                    planNewVisit={this.planNewVisit}
+                    logPastVisit={this.logPastVisit}
                   />
               )} />
 
-              {/* <Route path="/past_visits" render={() => { return 
-                this.state.pastVisits.map(eachVisit =>  <PastVisit eachVisit={eachVisit} park={this.state.parks.filter(park => park.id === eachVisit.id )} />)
-              }} /> */}
-
               <Route path="/past_visits" render={() =>
-                (<PastVisit pastVisits={this.state.pastVisits} />
-                )} />
+                (<PastVisit pastVisits={this.state.pastVisits} />)
+              } />
 
-              <Route path="/future_visits" render={() => (<FutureVisit futureVisits={this.state.futureVisits}
-              />)} />
+              <Route path="/future_visits" render={() =>
+                (<FutureVisit futureVisits={this.state.futureVisits} />)
+              } />
 
               <Route path="/login" render={() => (
                 <UserPage
