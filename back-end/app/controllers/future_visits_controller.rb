@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class FutureVisitsController < ApplicationController
-
-  def index 
+  def index
     visits = FutureVisit.all
-    render json: visits.to_json(include: [:park, :user]), status: :ok
+    render json: visits.to_json(include: %i[park user]), status: :ok
   end
 
   def show
@@ -15,7 +14,7 @@ class FutureVisitsController < ApplicationController
   def create
     new_visit = FutureVisit.new(s_params)
     if new_visit.save
-      render json: new_visit, status: :created
+      render json: new_visit.to_json(include: %i[park user]), status: :created
     else
       render json: new_visit.errors.full_messages, status: :unprocessable_entity
     end
@@ -30,6 +29,6 @@ class FutureVisitsController < ApplicationController
   private
 
   def s_params
-    params.require(:visit).permit(:visitor_id, :park_id, :title, :desciption, :season, :year)
+    params.require(:visit).permit(:user_id, :park_id, :title, :description, :season, :year)
   end
 end
