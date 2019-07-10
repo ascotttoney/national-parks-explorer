@@ -19,13 +19,12 @@ export default class AllContainer extends Component {
   state = {
     redirect: "",
     form: {
-      user_id: '',
-      park_id: '',
-      title: '',
-      description: '',
-      season: '',
-      year: ''
-    },
+      user_id: "",
+      park_id: "",
+      title: "",
+      description: "",
+      season: "",
+      year: "" },
     newVisitState: '',
     newVisit: {},
     modalShow: false,
@@ -40,16 +39,14 @@ export default class AllContainer extends Component {
       firstName: "",
       lastName: "",
       profilePicture: "",
-      errors: ""
-    },
+      errors: "" },
     newUser: {
       userName: "",
       password: "",
       firstName: "",
       lastName: "",
       profilePicture: "",
-      errors: ""
-    },
+      errors: "" },
     signUpForm: false
   }
 
@@ -242,8 +239,6 @@ export default class AllContainer extends Component {
       <React.Fragment>
         <MyModal
           show={this.state.modalShow}
-          onHide={this.modalClose} />
-
           onHide={this.modalClose}
           newVisitState={this.state.newVisitState}
           postVisit={this.postVisit} />
@@ -263,20 +258,13 @@ export default class AllContainer extends Component {
                   <ParkDetails
                     park={this.state.showPark}
                     backToParks={this.backToParks}
-                    modalShow={this.modalShow} /> :
-                  <Map
-                    parks={this.displayParks()}
-                    showPark={this.showPark}
-                    modalShow={this.modalShow} />
                     planNewVisit={this.planNewVisit}
-                    logPastVisit={this.logPastVisit}
-                  /> :
+                    logPastVisit={this.logPastVisit} /> :
                   <Map
                     parks={this.displayParks()}
                     showPark={this.showPark}
                     planNewVisit={this.planNewVisit}
-                    logPastVisit={this.logPastVisit}
-                  />
+                    logPastVisit={this.logPastVisit} />
               )} />
 
               <Route path="/parks" render={() => (
@@ -287,27 +275,17 @@ export default class AllContainer extends Component {
                   <Parks
                     parks={this.displayParks()}
                     showPark={this.showPark}
-                    modalShow={this.modalShow} />
-              )} />
-
-              <Route path="/past_visits" render={() => (
-                <PastVisit pastVisits={this.state.pastVisits} />
-              )} />
-
-              <Route path="/future_visits" render={() => (
-                <FutureVisit futureVisits={this.state.futureVisits} />
-              )} />
                     planNewVisit={this.planNewVisit}
                     logPastVisit={this.logPastVisit}
                   />
               )} />
 
-              <Route path="/past_visits" render={() =>
-                (<PastVisit pastVisits={this.state.pastVisits} />)
+              <Route path="/past_visits" render={() => (
+                <PastVisit pastVisits={this.state.pastVisits} />)
               } />
 
-              <Route path="/future_visits" render={() =>
-                (<FutureVisit futureVisits={this.state.futureVisits} />)
+              <Route path="/future_visits" render={() => (
+                <FutureVisit futureVisits={this.state.futureVisits} />)
               } />
 
               <Route path="/login" render={() => (
@@ -324,7 +302,9 @@ export default class AllContainer extends Component {
               <Route path="/profile" render={() => (
                 <Profile
                   user={this.state.user}
-                  handleLogout={this.handleLogout} />
+                  handleLogout={this.handleLogout}
+                  pastVisits={this.state.pastVisits}
+                  futureVisits={this.state.futureVisits} />
               )} />
 
               <Route component={NoMatch} />
