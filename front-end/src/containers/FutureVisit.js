@@ -33,8 +33,8 @@ export default class FutureVisit extends Component {
               </Card>
             </Col>
             </Row>
-        )
-       })}
+          )
+        })}
       </Container>
     )
   }
