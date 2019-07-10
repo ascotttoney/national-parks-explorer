@@ -6,14 +6,13 @@ export default class Profile extends Component {
     return(
       <Container>
       <Row className="pt-3 pb-5 justify-content-md-center">
-      <Col md={10}>
+      <Col md={8}>
         <Card>
-          <Card.Img style={{width: '300px'}} variant="top" src={this.props.user.profilePicture} />
+          <Card.Img style={{width: '25%'}} variant="right" src={this.props.user.profilePicture} roundedCircle />
           <Card.Body>
             <Card.Title>Hello, {this.props.user.firstName}!</Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
+              Welcome to your National Parks Expolorer profile!
             </Card.Text>
           </Card.Body>
 
@@ -24,13 +23,11 @@ export default class Profile extends Component {
           </ListGroup>
 
           <Card.Body>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
+            <Button variant="primary" type="submit" onClick={this.props.handleLogout}>
+              Log Out
+            </Button>
           </Card.Body>
 
-          <Button variant="primary" type="submit" onClick={this.props.handleLogout}>
-            Log Out
-          </Button>
         </Card>
       </Col>
       </Row>
