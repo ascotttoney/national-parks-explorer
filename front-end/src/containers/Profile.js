@@ -4,8 +4,9 @@ import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button } from 'rea
 export default class Profile extends Component {
   render() {
     return(
-      <Container>
-      <Row className="pt-3 pb-5 justify-content-md-center">
+      
+      <Container >
+      <Row className="pt-3 pb-5 justify-content-md-center" >
       <Col md={8}>
         <Card>
           <Card.Img style={{width: '25%'}} variant="right" src={this.props.user.profilePicture} roundedCircle />
@@ -16,13 +17,13 @@ export default class Profile extends Component {
             </Card.Text>
           </Card.Body>
 
-          <ListGroup className="list-group-flush">
+          <ListGroup className="list-group-flush" >
             <ListGroupItem>National Parks Visited:</ListGroupItem>
             <ListGroupItem>National Parks Yet To Visit:</ListGroupItem>
             <ListGroupItem>Some Other Stuff?</ListGroupItem>
           </ListGroup>
 
-          <Card.Body>
+          <Card.Body >
             <Button variant="primary" type="submit" onClick={this.props.handleLogout}>
               Log Out
             </Button>
@@ -32,6 +33,7 @@ export default class Profile extends Component {
       </Col>
       </Row>
       </Container>
+    
     )
   }
 }
