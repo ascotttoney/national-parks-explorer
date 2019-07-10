@@ -14,7 +14,7 @@ class FutureVisitsController < ApplicationController
   def create
     new_visit = FutureVisit.new(s_params)
     if new_visit.save
-      render json: new_visit.to_json(include: %i[park user]), status: :created
+      render json: new_visit.to_json(include: [:user, park: { include: [:park_images] }]), status: :created
     else
       render json: new_visit.errors.full_messages, status: :unprocessable_entity
     end

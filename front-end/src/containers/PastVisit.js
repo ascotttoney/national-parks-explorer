@@ -6,7 +6,7 @@ export default class PastVisit extends Component {
     return (
       <Container>
         {this.props.pastVisits.map(visit => {
-          // const img = visit.park.park_images[Math.floor(Math.random() * visit.park.park_images.length)]
+          const img = visit.park.park_images[Math.floor(Math.random() * visit.park.park_images.length)]
           return (
             <Row className="pt-3 pb-3 justify-content-md-center">
               <Col md={9}>
@@ -29,7 +29,7 @@ export default class PastVisit extends Component {
                     className='p-2'
                     variant='bottom'
                     style={{ maxHeight: '20rem', borderRadius: '10px' }}
-                  // src={ img.url }
+                    src={img ? img.url : null}
                   />
                 </Card>
               </Col>
@@ -40,44 +40,3 @@ export default class PastVisit extends Component {
     )
   }
 }
-
-
-// import React, { Component } from 'react'
-// import { Container, Card, Row, Col, Button, Form } from 'react-bootstrap'
-
-// export const PastVisit = (props) => {
-//   return (
-//     <Container>
-//       {props.pastVisits.map(visit => {
-//         // const img = visit.park.park_images[Math.floor(Math.random() * visit.park.park_images.length)]
-
-//         return (
-//           <Row className="pt-3 pb-3 justify-content-md-center">
-//             <Col md={9}>
-//               <Card>
-//                 <Card.Header
-//                   as="h2"
-//                   className="text-white"
-//                   style={{ background: 'rgb(54, 75, 30)' }} >
-//                   {visit.park.fullname}
-//                 </Card.Header>
-//                 <Card.Body>
-//                   <h3>{`Title: ${visit.title}`}</h3>
-//                   <h4>{`By: ${visit.user.userName}`}</h4>
-//                   <h4>{`When: ${visit.season} ${visit.year}`}</h4>
-//                   <p>{visit.description}</p>
-//                 </Card.Body >
-//                 {/* <Card.Img
-//                   className='p-2'
-//                   variant='bottom'
-//                   style={{ maxHeight: '20rem', borderRadius: '10px' }}
-//                   src={visit.park.park_images[0].url}
-//                 /> */}
-//               </Card>
-//             </Col>
-//           </Row>
-//         )
-//       })}
-//     </Container>
-//   )
-// }

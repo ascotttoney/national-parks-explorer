@@ -3,7 +3,7 @@
 class PastVisitsController < ApplicationController
   def index
     visits = PastVisit.all
-    render json: visits.to_json(include: [:user, park: {include: [:park_images]}]), status: :ok
+    render json: visits.to_json(include: [:user, park: { include: [:park_images] }]), status: :ok
   end
 
   def show
@@ -14,7 +14,7 @@ class PastVisitsController < ApplicationController
   def create
     new_visit = PastVisit.new(s_params)
     if new_visit.save
-      render json: new_visit, status: :created
+      render json: new_visit.to_json(include: [:user, park: { include: [:park_images] }]), status: :created
     else
       render json: new_visit.errors.full_messages, status: :unprocessable_entity
     end
