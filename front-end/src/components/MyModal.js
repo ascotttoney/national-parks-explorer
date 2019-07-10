@@ -19,7 +19,8 @@ export default class MyModal extends Component {
   render() {
     return (
       <Modal
-        {...this.props}
+        onHide={this.props.onHide}
+        show={this.props.show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
