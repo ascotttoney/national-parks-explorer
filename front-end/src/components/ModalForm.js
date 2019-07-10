@@ -7,9 +7,22 @@ export default function ModalForm(props) {
       <form>
         <div className="form-group" >
           <label>Trip Title <FaKiwiBird /></label>
-          <input required type="text" id="title" className="form-control" name="title" value={props.form.title} onChange={props.handleFormChange} placeholder="My Awesome Trip" />
+          <input
+            required
+            type="text"
+            id="title"
+            className="form-control"
+            name="title"
+            value={props.form.title}
+            onChange={props.handleFormChange}
+            placeholder="My Awesome Trip" />
           <label>Trip Review <FaFeatherAlt /></label>
-          <textarea name="description" id="description" className="form-control" value={props.form.description} onChange={props.handleFormChange} />
+          <textarea
+            name="description"
+            id="description"
+            className="form-control"
+            value={props.form.description}
+            onChange={props.handleFormChange} />
           <div className="row">
             <div className="col-sm-6" >
               <label>Season <GiFireFlower /><FaSun /><FaLeaf /><FaSnowflake /></label>
@@ -23,7 +36,15 @@ export default function ModalForm(props) {
             </div>
             <div className="col-sm-6">
               <label>Year <FaRegCalendar /></label>
-              <input type="text" id="year" className="form-control" name="year" value={props.form.year} onChange={props.handleFormChange} placeholder="2018" required />
+              <input
+                type="text"
+                id="year"
+                className="form-control"
+                name="year"
+                value={props.form.year}
+                onChange={props.handleFormChange}
+                placeholder="2018"
+                required />
             </div>
           </div>
         </div>
