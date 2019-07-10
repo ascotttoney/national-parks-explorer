@@ -53,7 +53,11 @@ export const Map = (props) => {
         {props.parks.map(parkMarker)}
         {selected && (
           < Popup latitude={getLat(selected)} longitude={getLong(selected)} onClose={() => setSelected(null)}>
-            <ParkCard park={selected} showPark={props.showPark} modalShow={props.modalShow} />
+            <ParkCard
+              park={selected}
+              showPark={props.showPark}
+              planNewVisit={props.planNewVisit}
+              logPastVisit={props.logPastVisit} />
           </Popup>
         )}
       </ReactMap>

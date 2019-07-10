@@ -8,7 +8,12 @@ export default class ParksContainer extends Component {
         <h1 className="text-center">National Parks</h1>
         <div className="p-3 row justify-content-md-center">
           {this.props.parks.map(park => {
-            return <ParkCard key={park.id} park={park} showPark={this.props.showPark} modalShow={this.props.modalShow} />
+            return <ParkCard
+              key={park.id}
+              park={park}
+              showPark={this.props.showPark}
+              planNewVisit={this.props.planNewVisit}
+              logPastVisit={this.props.logPastVisit} />
           })}
         </div>
       </div>

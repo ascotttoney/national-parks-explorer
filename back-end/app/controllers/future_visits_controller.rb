@@ -30,6 +30,6 @@ class FutureVisitsController < ApplicationController
   private
 
   def s_params
-    params.require(:FutureVisit).permit(:visitor_id, :park_id, :title, :desciption, :season, :year)
+    params.require(:visit).permit(:visitor_id, :park_id, :title, :desciption, :season, :year)
   end
 end
