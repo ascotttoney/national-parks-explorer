@@ -20,14 +20,14 @@ export default class ParkCard extends React.PureComponent {
           </div>
 
           <Button
-            type="button"
-            className="btn btn-success m-2"
-            onClick={e => this.props.logPastVisit(this.props.park)} >Log Past Visit</Button>
+            className="m-2"
+            style={{ background: 'rgb(54, 75, 30)' }}
+            onClick={e => this.props.logPastVisit(this.props.park)}> Log Past Visit </Button>
 
           <Button
-            type="button"
-            className="btn btn-warning m-2"
-            onClick={e => this.props.planNewVisit(this.props.park)}>Plan New Visit</Button>
+            className="m-2"
+            style={{ background: 'rgb(54, 75, 30)' }}
+            onClick={e => this.props.planNewVisit(this.props.park)}> Plan New Visit </Button>
 
         </Card>
       </div>
