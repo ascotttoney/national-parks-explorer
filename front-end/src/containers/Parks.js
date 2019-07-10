@@ -8,7 +8,6 @@ export default class ParksContainer extends Component {
       <div>
         <Container>
           <h1 className="text-center">National Parks</h1>
-
           <CardColumns>
             <div className="p-3 row justify-content-md-center">
               {this.props.parks.map(park => {
