@@ -10,7 +10,7 @@
   user.save
 end
 
-limit = 100
+limit = 60
 URL_BASE = "https://developer.nps.gov/api/v1/parks?fields=images&limit=#{limit}&start="
 start = 1
 API_KEY = '&api_key=Hbwwee9IX6XMWbZrmgd6XgAoM8WsOzXcGqbR3WoK'

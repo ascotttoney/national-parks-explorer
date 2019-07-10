@@ -16,7 +16,6 @@ export default class Profile extends Component {
                   Welcome to your National Parks Explorer profile!
             </Card.Text>
               </Card.Body>
-
               <ListGroup className="list-group-flush">
                 <ListGroupItem>National Parks Visited:
                 </ListGroupItem>
@@ -33,6 +32,7 @@ export default class Profile extends Component {
           </Col>
         </Row>
       </Container>
+    
     )
   }
 }
