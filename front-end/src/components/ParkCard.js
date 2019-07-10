@@ -4,7 +4,7 @@ import { Container, Card, CardColumns, Button } from 'react-bootstrap'
 
 export default class ParkCard extends React.PureComponent {
   render() {
-    const img = this.props.park.imgs[Math.floor(Math.random() * this.props.park.imgs.length)]
+    const img = this.props.park.park_images[Math.floor(Math.random() * this.props.park.park_images.length)]
 
     return (
       <div>
