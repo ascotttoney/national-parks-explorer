@@ -4,7 +4,6 @@ import { NavigationBar } from './NavigationBar';
 import Parks from './Parks'
 import { PastVisit } from './PastVisit';
 import FutureVisit from './FutureVisit';
-import UserPage from './UserPage'
 import { NoMatch } from '../components/NoMatch'
 import { Layout } from './Layout';
 import { ParkDetails } from '../components/ParkDetails';
@@ -16,44 +15,42 @@ import Login from './Login';
 const URL = `http://localhost:3000/`
 
 export default class AllContainer extends Component {
-  state = {
-    redirect: "",
-    form: {
-      user_id: "",
-      park_id: "",
-      title: "",
-      description: "",
-      season: "",
-      year: "" },
-    newVisitState: '',
-    newVisit: {},
-    modalShow: false,
-    parks: [],
-    showPark: false,
-    pastVisits: [],
-    futureVisits: [],
-    search: "",
-    user: {
-      userName: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      profilePicture: "",
-      errors: "" },
-    newUser: {
-      userName: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      profilePicture: "",
-      errors: "" },
-    signUpForm: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      newVisitState: '',
+      newVisit: {},
+      modalShow: false,
+      parks: [],
+      showPark: false,
+      pastVisits: [],
+      futureVisits: [],
+      search: "",
+      user: {
+        id: "",
+        userName: "",
+        firstName: "",
+        lastName: "",
+        profilePicture: "",
+        errors: ""
+      },
+      newUser: {
+        userName: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        profilePicture: "",
+        errors: ""
+      },
+      signUpForm: false
+    }
   }
 
   // need user ID
   postVisit = (visit) => {
     let newVisit = visit
     newVisit['park_id'] = this.state.newVisit['park_id']
+    newVisit['user_id'] = this.state.user['id']
     let url = URL + this.state.newVisitState.toLowerCase() + '_visits'
 
     fetch(url, {
@@ -62,16 +59,20 @@ export default class AllContainer extends Component {
       body: JSON.stringify({ visit: newVisit })
     })
       .then(res => res.json())
-      .then(visit => {
+      .then(postVisit => {
         if (this.state.newVisit === "Future") {
-          let visits = [...this.state.futureVisits, visit]
-          this.setState({ futureVisits: visits })
+          this.modalClose()
+          console.log(postVisit)
+          // let visits = [...this.state.futureVisits, postVisit]
+          // window.history.pushState({ url: '/future_visits' }, '', '/future_visits')
+          // this.setState({ futureVisits: visits, redirect: <Redirect to='/future_visits' /> })
         } else {
-          let visits = [...this.state.pastVisits, visit]
-          this.setState({ pastVisits: visits })
+          this.modalClose()
+          let visits = [...this.state.pastVisits, postVisit]
+          console.log(visits)
+          this.setState({ pastVisits: visits, redirect: <Redirect to='/past_visits' /> })
         }
       })
-    this.modalClose()
   }
 
   modalShow = () => this.setState({ modalShow: true })
@@ -151,9 +152,10 @@ export default class AllContainer extends Component {
       method: 'GET',
       headers: { Authorization: token }
     })
-    .then(res => res.json())
-    .then(data => this.setState({user: data.user})
-  )}
+      .then(res => res.json())
+      .then(data => this.setState({ user: data.user })
+      )
+  }
 
 
   // LOGIN & LOGOUT //
