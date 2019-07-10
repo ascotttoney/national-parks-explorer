@@ -6,7 +6,7 @@ import { FaMap } from 'react-icons/fa'
 import { GiPineTree } from 'react-icons/gi'
 
 export const ParkDetails = (props) => {
-  const { url, fullname, states, description, weatherInfo, imgs } = props.park
+  const { url, fullname, states, description, weatherInfo, park_images } = props.park
   return (
     <div className="container">
       <div className="page-header">
@@ -16,7 +16,7 @@ export const ParkDetails = (props) => {
       </div>
 
       <Gallery cssModule={styles} >
-        {imgs.map(img => <div key={img.id} data-src={img.url} />)}
+        {park_images.map(img => <div key={img.id} data-src={img.url} />)}
       </Gallery>
 
       <div className="pt-4 text-dark">

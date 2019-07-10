@@ -26,8 +26,8 @@ export const NavigationBar = (props) => (
       <Navbar.Collapse id="basic-navbar-nav" >
         <Nav className='mr-auto'>
           <Nav.Item><Nav.Link href="/parks">Parks</Nav.Link></Nav.Item>
-          {localStorage.token ? <Nav.Item><Nav.Link href="/future_visits">Future Visit</Nav.Link></Nav.Item> : null}
-          {localStorage.token ? <Nav.Item><Nav.Link href="/past_visits">Past Visit</Nav.Link></Nav.Item> : null}
+          {localStorage.token ? <Nav.Item><Nav.Link href="/future_visits">My Future Visits</Nav.Link></Nav.Item> : null}
+          {localStorage.token ? <Nav.Item><Nav.Link href="/past_visits"> My Past Visits</Nav.Link></Nav.Item> : null}
         </Nav>
       </Navbar.Collapse>
 
@@ -35,11 +35,13 @@ export const NavigationBar = (props) => (
         <Nav className="ml-auto">
           <Nav.Item><Nav.Link name='profile' href="/profile">Profile</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link name='logout' onClick={props.handleLogout}>Logout</Nav.Link></Nav.Item>
+            <span> - </span>
           <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
         </Nav>
           :
         <Nav className="ml-auto">
           <Nav.Item><Nav.Link name='login' href="/login">Login</Nav.Link></Nav.Item>
+            <span> - </span>
           <input type="text" placeholder="Search" aria-label="Search" onChange={e => props.searchChange(e)} />
         </Nav>
       }

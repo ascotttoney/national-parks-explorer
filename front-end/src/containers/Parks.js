@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import { Container, Card, CardColumns, Button } from 'react-bootstrap'
+import { Container, Row, Card, CardColumns, Button, Image } from 'react-bootstrap'
 import ParkCard from '../components/ParkCard'
+import logo from '../components/mod-4-project-logo.png'
 
 export default class ParksContainer extends Component {
   render() {
     return (
       <div>
         <Container>
-          <h1 className="text-center">National Parks</h1>
+          <Row className="justify-content-md-center">
+            <Image
+              src={logo}
+              style={{maxHeight: '12rem'}} />
+          </Row>
+
           <CardColumns>
             <div>
               {this.props.parks.map(park => {
@@ -20,6 +26,7 @@ export default class ParksContainer extends Component {
               })}
             </div>
           </CardColumns>
+          
         </Container>
       </div>
     )

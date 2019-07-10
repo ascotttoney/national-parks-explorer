@@ -8,8 +8,7 @@ class ParksController < ApplicationController
 
   def index
     parks = Park.national_parks
-    parks = parks.map
-    render json: parks, status: :ok
+    render json: parks.to_json(include: %i[park_images]), status: :ok
   end
 
   def images
