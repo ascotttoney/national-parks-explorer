@@ -29,6 +29,6 @@ class PastVisitsController < ApplicationController
   private
 
   def s_params
-    params.require(:visit).permit(:visitor_id, :park_id, :title, :description, :season, :year)
+    params.require(:visit).permit(:user_id, :park_id, :title, :description, :season, :year)
   end
 end

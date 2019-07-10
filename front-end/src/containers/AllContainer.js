@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { NavigationBar } from './NavigationBar';
 import Parks from './Parks'
-import { PastVisit } from './PastVisit';
+import PastVisit from './PastVisit';
 import FutureVisit from './FutureVisit';
 import { NoMatch } from '../components/NoMatch'
 import { Layout } from './Layout';
@@ -17,7 +17,7 @@ const URL = `http://localhost:3000/`
 export default class AllContainer extends Component {
   constructor(props) {
     super(props)
-    
+
     this.state = {
       newVisitState: '',
       newVisit: {},
@@ -54,6 +54,8 @@ export default class AllContainer extends Component {
     newVisit['park_id'] = this.state.newVisit['park_id']
     newVisit['user_id'] = this.state.user['id']
     let url = URL + this.state.newVisitState.toLowerCase() + '_visits'
+
+    console.log(JSON.stringify({ visit: newVisit }));
 
     fetch(url, {
       method: 'POST',
@@ -102,7 +104,7 @@ export default class AllContainer extends Component {
   fetchParks() {
     fetch(URL + 'parks')
       .then(res => res.json())
-      .then(parks => this.setState({parks: parks})
+      .then(parks => this.setState({ parks: parks })
       )
   }
 

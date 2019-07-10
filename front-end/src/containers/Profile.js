@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 
-const URL = "http://localhost:3000/"
-
 export default class Profile extends Component {
   render() {
     return (

@@ -23,14 +23,14 @@ export default class FutureVisit extends Component {
                   <h3>{ `Title: ${visit.title}` }</h3>
                   <h4>{ `By: ${visit.user.userName}` }</h4>
                   <h4>{ `When: ${visit.season} ${visit.year}` }</h4>
-                  <p>{ visit.description }</p>
+                 <p>{ visit.description }</p>
                 </Card.Body>
 
                 <Card.Img
                   className='p-2'
                   variant='bottom'
                   style={{ maxHeight: '20rem', borderRadius: '10px' }}
-                  src={ img.url }
+                  // src={ img.url }
                 />
               </Card>
             </Col>

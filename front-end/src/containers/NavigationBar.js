@@ -26,11 +26,11 @@ export const NavigationBar = (props) => (
       <Navbar.Collapse id="basic-navbar-nav" >
         <Nav className='mr-auto'>
           <Nav.Item><Nav.Link href="/parks">Parks</Nav.Link></Nav.Item>
-          {localStorage.token ? <Nav.Item><Nav.Link href="/future_visits">My Future Visits</Nav.Link></Nav.Item> : null}
-          {localStorage.token ? <Nav.Item><Nav.Link href="/past_visits"> My Past Visits</Nav.Link></Nav.Item> : null}
+          {localStorage.token ? <Nav.Item><Nav.Link href="/future_visits">Future Visits</Nav.Link></Nav.Item> : null}
+          {localStorage.token ? <Nav.Item><Nav.Link href="/past_visits">Past Visits</Nav.Link></Nav.Item> : null}
         </Nav>
       </Navbar.Collapse>
-
+  
       {localStorage.token ?
         <Nav className="ml-auto">
           <Nav.Item><Nav.Link name='profile' href="/profile">Profile</Nav.Link></Nav.Item>
