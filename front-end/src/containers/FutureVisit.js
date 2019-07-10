@@ -1,33 +1,31 @@
-
 import React, { Component } from 'react'
+import { ParkCard } from '../components/ParkCard'
+import { Route } from 'react-router-dom'
+import { Container, Row, Card } from 'react-bootstrap'
 
 export default class FutureVisit extends Component {
-
-
   render() {
     return (
-      <div>
-       {this.props.futureVisits.map(visit => {
-        return( 
-        <div className="m-1 card" style={{ width: '90rem' }}>
-        <div className="card-body">
-          {/* <img className="card-img-top" src={visit.park_id}/> */}
-          <h2 className="card-title">{`Park: ${visit.park.name}`}</h2>
-          
-              <h3>{ `Title: ${visit.title}` }</h3>
-              <h3>{ `Name: ${visit.user.userName}` }</h3>
-              <h3>{ `Season: ${visit.season}: ${visit.year}` }</h3>
+      <Container>
+        {this.props.futureVisits.map(visit => {
+          return (
+            <Row className="pt-3 pb-2 justify-content-md-center">
+              <Card className="m-1 card" style={{ width: '50rem' }}>
+                <Card.Body className="card-body">
 
-              
-              <p className="card-text">{ visit.description }</p>
-        </div>
-        </div>
-        )
+                  <h2 className="card-title">{visit.park.fullname}</h2>
 
-        
-        //  console.log(visit)
-       })}
-      </div>
+                  <h3>{ `Title: ${visit.title}` }</h3>
+                  <h3>{ `Name: ${visit.user.firstName} ${visit.user.lastName}` }</h3>
+                  <h3>{ `Season: ${visit.season} ${visit.year}` }</h3>
+
+                  <p className="card-text">{visit.description }</p>
+                </Card.Body>
+              </Card>
+            </Row>
+          )
+        })}
+      </Container>
     )
   }
 }

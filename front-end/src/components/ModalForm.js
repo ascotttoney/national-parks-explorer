@@ -28,10 +28,10 @@ export default function ModalForm(props) {
               <label>Season <GiFireFlower /><FaSun /><FaLeaf /><FaSnowflake /></label>
               <select name="season" className="form-control" onChange={props.handleFormChange} required>
                 <option value=""></option>
-                <option value="spring">Spring</option>
-                <option value="summer">Summer</option>
-                <option value="fall">Fall</option>
-                <option value="winter">Winter</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+                <option value="Fall">Fall</option>
+                <option value="Winter">Winter</option>
               </select>
             </div>
             <div className="col-sm-6">
