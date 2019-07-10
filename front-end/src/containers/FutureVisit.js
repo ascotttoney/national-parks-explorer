@@ -9,7 +9,7 @@ export default class FutureVisit extends Component {
       <div>
        {this.props.futureVisits.map(visit => {
         return( 
-        <div className="m-1 card" style={{ width: '50rem' }}>
+        <div className="m-1 card" style={{ width: '90rem' }}>
         <div className="card-body">
           {/* <img className="card-img-top" src={visit.park_id}/> */}
           <h2 className="card-title">{`Park: ${visit.park.name}`}</h2>
