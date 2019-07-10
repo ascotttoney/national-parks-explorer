@@ -18,6 +18,7 @@ const URL = `http://localhost:3000/`
 export default class AllContainer extends Component {
   state = {
     newVisitState: '',
+    newVisit: {},
     modalShow: false,
     parks: [],
     showPark: false,
@@ -43,6 +44,30 @@ export default class AllContainer extends Component {
     signUpForm: false
   }
 
+  // need user ID
+  postVisit = (visit) => {
+    let newVisit = visit
+    newVisit['park_id'] = this.state.newVisit['park_id']
+    let url = URL + this.state.newVisitState.toLowerCase() + '_visits'
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', accepts: 'application/json' },
+      body: JSON.stringify({ visit: newVisit })
+    })
+      .then(res => res.json())
+      .then(visit => {
+        if (this.state.newVisit === "Future") {
+          let visits = [...this.state.futureVisits, visit]
+          this.setState({ futureVisits: visits })
+        } else {
+          let visits = [...this.state.pastVisits, visit]
+          this.setState({ pastVisits: visits })
+        }
+      })
+    this.modalClose()
+  }
+
   modalShow = () => this.setState({ modalShow: true })
   modalClose = () => this.setState({ modalShow: false })
   searchChange = (e) => e.target.value.length > 2 ? this.setState({ search: e.target.value.toLowerCase() }) : this.setState({ search: e.target.value })
@@ -53,13 +78,13 @@ export default class AllContainer extends Component {
     return park.fullname.toLowerCase().includes(search) || park.description.toLowerCase().includes(search) || park.weatherInfo.toLowerCase().includes(search) || park.states.includes(search)
   }
 
-  planNewVisit = () => {
-    this.setState({ newVisitState: "New" })
+  planNewVisit = (park) => {
+    this.setState({ newVisitState: "Future", newVisit: { park_id: park.id } })
     this.modalShow()
   }
 
-  logPastVisit = () => {
-    this.setState({ newVisitState: "Past" })
+  logPastVisit = (park) => {
+    this.setState({ newVisitState: "Past", newVisit: { park_id: park.id } })
     this.modalShow()
   }
 
@@ -192,6 +217,7 @@ export default class AllContainer extends Component {
           show={this.state.modalShow}
           onHide={this.modalClose}
           newVisitState={this.state.newVisitState}
+          postVisit={this.postVisit}
         />
         <NavigationBar
           searchChange={this.searchChange}

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class PastVisitsController < ApplicationController
-
-  def index 
+  def index
     visits = PastVisit.all
-    render json: visits.to_json(include: [:park, :user]), status: :ok
+    render json: visits.to_json(include: %i[park user]), status: :ok
   end
 
   def show
@@ -30,6 +29,6 @@ class PastVisitsController < ApplicationController
   private
 
   def s_params
-    params.require(:PastVisit).permit(:visitor_id, :park_id, :title, :description, :season, :year)
+    params.require(:visit).permit(:visitor_id, :park_id, :title, :description, :season, :year)
   end
 end

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import ModalForm from './ModalForm'
+import { MdPhotoAlbum } from 'react-icons/md'
+import { FaCarSide } from 'react-icons/fa'
 
 export default class MyModal extends Component {
   state = {
@@ -24,14 +26,16 @@ export default class MyModal extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            {`${this.props.newVisitState} Visit Form`}
+            {`${this.props.newVisitState} Visit Form `}
+            {this.props.newVisitState === "Future" ? <FaCarSide /> : <MdPhotoAlbum />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ModalForm form={this.state} handleFormChange={this.handleFormChange} />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button className="btn btn-success" onClick={e => this.props.postVisit(this.state)}>Create</Button>
+          <Button className="btn btn-danger" onClick={this.props.onHide}>Cancel</Button>
         </Modal.Footer>
       </Modal >
     );

@@ -20,8 +20,8 @@ export const ParkDetails = (props) => {
         <p>{description}</p>
         <p>{weatherInfo}</p>
         <Button type="button" className="btn btn-primary" onClick={props.backToParks}>Back</Button>
-        <Button type="button" className="btn btn-success m-1 float-right" onClick={e => props.logPastVisit()}>Log Past Visit</Button>
-        <Button type="button" className="btn btn-warning m-1 float-right" onClick={e => props.planNewVisit()}> Plan New Visit</Button>
+        <Button type="button" className="btn btn-success m-1 float-right" onClick={e => props.logPastVisit(props.park)}>Log Past Visit</Button>
+        <Button type="button" className="btn btn-warning m-1 float-right" onClick={e => props.planNewVisit(props.park)}> Plan New Visit</Button>
       </div >
     </div >
   )
