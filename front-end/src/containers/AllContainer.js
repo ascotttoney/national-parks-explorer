@@ -40,13 +40,24 @@ export default class AllContainer extends Component {
         firstName: "",
         lastName: "",
         profilePicture: "",
-        errors: ""
+        errors: "",
+        myPastVisits: [],
+        myFutureVisits: []
       },
       signUpForm: false
     }
   }
 
-  // need user ID
+  getMyVisits = () => {
+    if (!localStorage.token) return null
+    return this.state.pastVisits.filter(visit => visit.id === this.state.user.id)
+  }
+
+  getMyFuture = () => {
+    if (!localStorage.token) return null
+    return this.state.futureVisits.filter(visit => visit.id === this.state.user.id)
+  }
+
   postVisit = (visit) => {
     let newVisit = visit
     newVisit['park_id'] = this.state.newVisit['park_id']
@@ -233,7 +244,6 @@ export default class AllContainer extends Component {
     this.state.signUpForm ? this.setState({ signUpForm: false }) : this.setState({ signUpForm: true })
   }
 
-
   // RENDER & ROUTES //
 
   render() {
@@ -305,8 +315,8 @@ export default class AllContainer extends Component {
                 <Profile
                   user={this.state.user}
                   handleLogout={this.handleLogout}
-                  pastVisits={this.state.pastVisits}
-                  futureVisits={this.state.futureVisits} />
+                  pastVisits={this.getMyVisits()}
+                  futureVisits={this.getMyFuture()} />
               )} />
 
               <Route component={NoMatch} />
