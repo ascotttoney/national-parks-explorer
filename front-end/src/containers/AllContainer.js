@@ -100,24 +100,22 @@ export default class AllContainer extends Component {
     this.modalShow()
   }
 
-  fetchImages(park) {
-    let newParks = this.state.parks
-    fetch(URL + `parks/${park.id}/images`)
-      .then(res => res.json())
-      .then(imgs => {
-        park.imgs = imgs
-        newParks.push(park)
-        this.setState({ parks: newParks })
-      })
-  }
+  // fetchImages(park) {
+  //   let newParks = this.state.parks
+  //   fetch(URL + `parks/${park.id}/images`)
+  //     .then(res => res.json())
+  //     .then(imgs => {
+  //       console.log("imgs", imgs)
+  //       park.imgs = imgs
+  //       newParks.push(park)
+  //       this.setState({ parks: newParks })
+  //     })
+  // }
 
   fetchParks() {
     fetch(URL + 'parks')
       .then(res => res.json())
-      .then(parks =>
-        parks.forEach(park => {
-          this.fetchImages(park)
-        })
+      .then(parks => this.setState({parks: parks})
       )
   }
 

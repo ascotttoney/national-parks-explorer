@@ -12,6 +12,7 @@ export default class ParksContainer extends Component {
           <CardColumns>
             <div>
               {this.props.parks.map(park => {
+                // console.log('park', park )
                 return <ParkCard
                   key={park.id}
                   park={park}
