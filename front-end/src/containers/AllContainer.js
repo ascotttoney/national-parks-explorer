@@ -142,7 +142,7 @@ export default class AllContainer extends Component {
   componentDidMount() {
     this.fetchParks()
     this.fetchVisits()
-    localStorage.token ? this.checkCurrentUser() : this.setState({ redirect: <Redirect to='/login' /> })
+    if (localStorage.token) this.checkCurrentUser()
   }
 
   checkCurrentUser = () => {

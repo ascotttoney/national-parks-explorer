@@ -16,7 +16,7 @@ export default class ParkCard extends React.PureComponent {
             src={img.url} alt={img.caption} />
 
           <div className="card-body">
-            <h5 className="card-title"><GiDirectionSign /> {this.props.park.name}</h5>
+            <h4 className="card-title"> <GiDirectionSign /> {this.props.park.name} </h4>
           </div>
 
           <Button

@@ -26,8 +26,8 @@ export const NavigationBar = (props) => (
       <Navbar.Collapse id="basic-navbar-nav" >
         <Nav className='mr-auto'>
           <Nav.Item><Nav.Link href="/parks">Parks</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link href="/future_visits">Future Visit</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link href="/past_visits">Past Visit</Nav.Link></Nav.Item>
+          {localStorage.token ? <Nav.Item><Nav.Link href="/future_visits">Future Visit</Nav.Link></Nav.Item> : null}
+          {localStorage.token ? <Nav.Item><Nav.Link href="/past_visits">Past Visit</Nav.Link></Nav.Item> : null}
         </Nav>
       </Navbar.Collapse>
 
