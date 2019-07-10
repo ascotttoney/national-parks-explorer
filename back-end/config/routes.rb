@@ -12,11 +12,13 @@ Rails.application.routes.draw do
 
   resources :park_images, only: %i[index show]
 
+  get '/profile', to: 'auth#profile'
+
   resources :parks, only: %i[index show]
     get '/parks/:id/images', to: 'parks#images'
     get '/parks/:id/past_visits', to: 'parks#past_visits'
     get '/parks/:id/past_visitors', to: 'parks#past_visitors'
     get '/parks/:id/future_visits', to: 'parks#future_visits'
     get '/parks/:id/future_visitors', to: 'parks#future_visitors'
-    
+
 end
