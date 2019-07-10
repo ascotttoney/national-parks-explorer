@@ -7,9 +7,11 @@ export const PastVisit = (props) => {
     return (
       <div>
         {props.pastVisits.map(visit => {
-          console.log('visit',visit)
 
-          return  (<div className="m-1 card" style={{ width: '50rem' }}>
+            // console.log('visit',visit)
+         return  (<div className="m-1 card" style={{ width: '90rem' }}>
+
+
             <div className="card-body">
               {/* <img className="card-img-top" src={(props.parks.find(p=> console.log('p', p)))}/> */}
 
