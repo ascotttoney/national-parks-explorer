@@ -8,7 +8,6 @@ export default class ParksContainer extends Component {
     return (
       <div>
         <Container>
-
           <Row className="justify-content-md-center">
             <Image
               src={logo}
@@ -28,6 +27,7 @@ export default class ParksContainer extends Component {
               })}
             </div>
           </CardColumns>
+          
         </Container>
       </div>
     )

@@ -6,6 +6,8 @@ export default class FutureVisit extends Component {
     return (
       <Container>
         {this.props.futureVisits.map(visit => {
+          const img = visit.park.park_images[Math.floor(Math.random() * visit.park.park_images.length)]
+
           return (
             <Row className="pt-3 pb-3 justify-content-md-center">
             <Col md={9}>
@@ -28,7 +30,7 @@ export default class FutureVisit extends Component {
                   className='p-2'
                   variant='bottom'
                   style={{ maxHeight: '20rem', borderRadius: '10px' }}
-                  src={ visit.park.park_images[0].url }
+                  src={ img.url }
                 />
               </Card>
             </Col>
