@@ -1,6 +1,6 @@
 import React from 'react'
 import { GiDirectionSign } from 'react-icons/gi'
-import { Container, Card, CardColumns, Button } from 'react-bootstrap'
+import { Container, Card, CardColumns, Button, Image } from 'react-bootstrap'
 
 export default class ParkCard extends React.PureComponent {
   render() {
@@ -9,7 +9,7 @@ export default class ParkCard extends React.PureComponent {
     return (
       <div>
         <Card>
-          <img
+          <Image
             className="p-2 card-img-bottom"
             onClick={(e) => this.props.showPark(this.props.park)}
             style={{ maxHeight: '35rem', borderRadius: "10px" }}
@@ -20,12 +20,12 @@ export default class ParkCard extends React.PureComponent {
 
           <Button
             className="m-2"
-            style={{ background: 'rgb(54, 75, 30)' }}
+            variant="success"
             onClick={e => this.props.logPastVisit(this.props.park)}> Log Past Visit </Button>
 
           <Button
             className="m-2"
-            style={{ background: 'rgb(54, 75, 30)' }}
+            variant="warning"
             onClick={e => this.props.planNewVisit(this.props.park)}> Plan New Visit </Button>
 
         </Card>
