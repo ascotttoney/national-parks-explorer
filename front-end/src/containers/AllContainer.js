@@ -48,6 +48,7 @@ export default class AllContainer extends Component {
     }
   }
 
+
   getMyVisits = () => {
     if (!localStorage.token) return null
     return this.state.pastVisits.filter(visit => visit.id === this.state.user.id)
@@ -73,14 +74,10 @@ export default class AllContainer extends Component {
       .then(postVisit => {
         if (this.state.newVisit === "Future") {
           this.modalClose()
-          console.log(postVisit)
-          // let visits = [...this.state.futureVisits, postVisit]
-          // window.history.pushState({ url: '/future_visits' }, '', '/future_visits')
-          // this.setState({ futureVisits: visits, redirect: <Redirect to='/future_visits' /> })
-        } else {
+        }
+        else {
           this.modalClose()
           let visits = [...this.state.pastVisits, postVisit]
-          console.log(visits)
           this.setState({ pastVisits: visits, redirect: <Redirect to='/past_visits' /> })
         }
       })

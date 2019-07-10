@@ -10,7 +10,7 @@
   user.save
 end
 
-limit = 60
+limit = 100
 URL_BASE = "https://developer.nps.gov/api/v1/parks?fields=images&limit=#{limit}&start="
 start = 1
 API_KEY = '&api_key=Hbwwee9IX6XMWbZrmgd6XgAoM8WsOzXcGqbR3WoK'
@@ -51,7 +51,7 @@ while i <= 4
                    park: parks[i],
                    title: Faker::Lorem.sentence,
                    description: Faker::Lorem.paragraph_by_chars(256, false),
-                   season: 'summer',
+                   season: 'Summer',
                    year: '2018')
   i += 1
 end
@@ -62,7 +62,7 @@ while i <= 4
                      park: parks[i],
                      title: Faker::Lorem.sentence,
                      description: Faker::Lorem.paragraph_by_chars(256, false),
-                     season: 'summer',
+                     season: 'Summer',
                      year: '2020')
   i += 1
 end
@@ -73,7 +73,7 @@ while i < 3
                    park: parks[i],
                    title: Faker::Lorem.sentence,
                    description: Faker::Lorem.paragraph_by_chars(256, false),
-                   season: 'summer',
+                   season: 'Summer',
                    year: '2018')
   i += 1
 end
@@ -83,7 +83,7 @@ while i <= 4
                      park: parks[i],
                      title: Faker::Lorem.sentence,
                      description: Faker::Lorem.paragraph_by_chars(256, false),
-                     season: 'summer',
+                     season: 'Summer',
                      year: '2018')
   i += 1
 end
