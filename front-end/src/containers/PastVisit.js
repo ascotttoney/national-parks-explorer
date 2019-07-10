@@ -24,6 +24,13 @@ export const PastVisit = (props) => {
                 <h4>{ `When: ${visit.season} ${visit.year}` }</h4>
                 <p>{ visit.description }</p>
               </Card.Body>
+
+              <Card.Img
+                className='p-2'
+                variant='bottom'
+                style={{ maxHeight: '20%', borderRadius: '10px' }}
+                src={ visit.park.park_images[0].url }
+              />
             </Card>
           </Col>
           </Row>

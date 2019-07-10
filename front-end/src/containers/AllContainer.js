@@ -17,6 +17,7 @@ const URL = `http://localhost:3000/`
 export default class AllContainer extends Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       newVisitState: '',
       newVisit: {},

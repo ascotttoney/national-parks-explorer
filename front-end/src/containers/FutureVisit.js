@@ -27,7 +27,7 @@ export default class FutureVisit extends Component {
                 <Card.Img
                   className='p-2'
                   variant='bottom'
-                  style={{ maxHeight: '20rem', borderRadius: '10px' }}
+                  style={{ maxHeight: '20%', borderRadius: '10px' }}
                   src={ visit.park.park_images[0].url }
                 />
               </Card>

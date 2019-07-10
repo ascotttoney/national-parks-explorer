@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-3.times do
-  fullname = Faker::FunnyName.two_word_name.split(' ')
-  user = User.new(userName: Faker::Kpop.iii_groups,
-                  password: '12345',
-                  firstName: fullname[0],
-                  lastName: fullname[1],
-                  profilePicture: Faker::LoremFlickr.image)
-  user.save
-end
+# 3.times do
+#   fullname = Faker::FunnyName.two_word_name.split(' ')
+#   user = User.new(userName: Faker::Kpop.iii_groups,
+#                   password: '12345',
+#                   firstName: fullname[0],
+#                   lastName: fullname[1],
+#                   profilePicture: Faker::LoremFlickr.image)
+#   user.save
+# end
 
 limit = 100
 URL_BASE = "https://developer.nps.gov/api/v1/parks?fields=images&limit=#{limit}&start="
@@ -42,48 +42,48 @@ while start < 500
   start += 100
 end
 
-users = [User.first, User.all[1], User.all[2]]
-parks = [Park.all[80], Park.all[11], Park.all[7], Park.all[90], Park.all[138]]
+# users = [User.first, User.all[1], User.all[2]]
+# parks = [Park.all[80], Park.all[11], Park.all[7], Park.all[90], Park.all[138]]
 
-i = 0
-while i <= 4
-  PastVisit.create(user: users[0],
-                   park: parks[i],
-                   title: Faker::Lorem.sentence,
-                   description: Faker::Lorem.paragraph_by_chars(256, false),
-                   season: 'Summer',
-                   year: '2018')
-  i += 1
-end
+# i = 0
+# while i <= 4
+#   PastVisit.create(user: users[0],
+#                    park: parks[i],
+#                    title: Faker::Lorem.sentence,
+#                    description: Faker::Lorem.paragraph_by_chars(256, false),
+#                    season: 'Summer',
+#                    year: '2018')
+#   i += 1
+# end
 
-i = 0
-while i <= 4
-  FutureVisit.create(user: users[1],
-                     park: parks[i],
-                     title: Faker::Lorem.sentence,
-                     description: Faker::Lorem.paragraph_by_chars(256, false),
-                     season: 'Summer',
-                     year: '2020')
-  i += 1
-end
+# i = 0
+# while i <= 4
+#   FutureVisit.create(user: users[1],
+#                      park: parks[i],
+#                      title: Faker::Lorem.sentence,
+#                      description: Faker::Lorem.paragraph_by_chars(256, false),
+#                      season: 'Summer',
+#                      year: '2020')
+#   i += 1
+# end
 
-i = 0
-while i < 3
-  PastVisit.create(user: users[2],
-                   park: parks[i],
-                   title: Faker::Lorem.sentence,
-                   description: Faker::Lorem.paragraph_by_chars(256, false),
-                   season: 'Summer',
-                   year: '2018')
-  i += 1
-end
-
-while i <= 4
-  FutureVisit.create(user: users[2],
-                     park: parks[i],
-                     title: Faker::Lorem.sentence,
-                     description: Faker::Lorem.paragraph_by_chars(256, false),
-                     season: 'Summer',
-                     year: '2018')
-  i += 1
-end
+# i = 0
+# while i < 3
+#   PastVisit.create(user: users[2],
+#                    park: parks[i],
+#                    title: Faker::Lorem.sentence,
+#                    description: Faker::Lorem.paragraph_by_chars(256, false),
+#                    season: 'Summer',
+#                    year: '2018')
+#   i += 1
+# end
+#
+# while i <= 4
+#   FutureVisit.create(user: users[2],
+#                      park: parks[i],
+#                      title: Faker::Lorem.sentence,
+#                      description: Faker::Lorem.paragraph_by_chars(256, false),
+#                      season: 'Summer',
+#                      year: '2018')
+#   i += 1
+# end
