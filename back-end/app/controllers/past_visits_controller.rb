@@ -3,7 +3,7 @@
 class PastVisitsController < ApplicationController
   def index
     visits = PastVisit.all
-    render json: visits.to_json(include: %i[park user]), status: :ok
+    render json: visits.to_json(include: %i[park user ]), status: :ok
   end
 
   def show
