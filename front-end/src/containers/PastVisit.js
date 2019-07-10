@@ -1,29 +1,43 @@
 import React, { Component } from 'react'
 import { ParkCard } from '../components/ParkCard'
 import { Route } from 'react-router-dom'
+import { Container, Card, Row, Col, Button, Form } from 'react-bootstrap'
 
 export const PastVisit = (props) => {
-  // console.log(props)
-    return (
-      <div>
-        {props.pastVisits.map(visit => {
-                   const img = visit.park.park_images[Math.floor(Math.random() * visit.park.park_images.length)]
-         return  (
-         <div className="m-1 card" 
-              style={{background: 'rgb(216, 110, 110)', maxHeight: '35rem', width: '89rem', borderRadius: "20px" }}>
-           <div className="card-body">           
-              <h2 className="card-title">{`Park: ${visit.park.name}`}</h2>
-              <img className="p-2 card-img-bottom" 
-                    style={{ width: '70rem', maxHeight: '20rem', borderRadius: "10px" }} 
-                    src={img.url}/>
+  return (
+    <Container>
+      {props.pastVisits.map(visit => {
+        const img = visit.park.park_images[Math.floor(Math.random() * visit.park.park_images.length)]
 
-              <h3>{ `Title: ${visit.title}` }</h3>
-              <h3>{ `Name: ${visit.user.userName}` }</h3>
-              <h3>{ `Season: ${visit.season}: ${visit.year}` }</h3>
-              <p className="card-text">{visit.description }</p>
-            </div>
-          </div> )}
-        )}
-      </div>
-    )
+        return (
+          <Row className="pt-3 pb-3 justify-content-md-center">
+          <Col md={9}>
+            <Card>
+              <Card.Header
+                as="h2"
+                className="text-white"
+                style={{ background: 'rgb(54, 75, 30)' }} >
+                  { visit.park.fullname }
+              </Card.Header>
+
+              <Card.Body>
+                <h3>{ `Title: ${visit.title}` }</h3>
+                <h4>{ `By: ${visit.user.userName}` }</h4>
+                <h4>{ `When: ${visit.season} ${visit.year}` }</h4>
+                <p>{ visit.description }</p>
+              </Card.Body>
+      
+              <Card.Img
+                  className='p-2'
+                  variant='bottom'
+                  style={{ maxHeight: '20rem', borderRadius: '10px' }}
+                  src={ img.url }
+              />
+            </Card>
+          </Col>
+          </Row>
+        )
+      })}
+    </Container>
+  )
 }

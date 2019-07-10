@@ -11,7 +11,7 @@ export default class ParksContainer extends Component {
           <Row className="justify-content-md-center">
             <Image
               src={logo}
-              style={{maxHeight: '15rem'}} />
+              style={{maxHeight: '12rem'}} />
           </Row>
 
           <CardColumns>
