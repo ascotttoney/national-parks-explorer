@@ -11,7 +11,7 @@ import { ParkDetails } from '../components/ParkDetails';
 import { Map } from '../components/Map';
 import MyModal from '../components/MyModal'
 import Profile from './Profile'
-import Login from './Login';
+import Login from './Login'
 
 const URL = `http://localhost:3000/`
 
