@@ -14,7 +14,6 @@ export default class ParkCard extends React.PureComponent {
             onClick={(e) => this.props.showPark(this.props.park)}
             style={{ maxHeight: '35rem', borderRadius: "10px" }}
             src={img.url} alt={img.caption} />
-
           <div className="card-body">
             <h4 className="card-title"> <GiDirectionSign /> {this.props.park.name} </h4>
           </div>
@@ -28,7 +27,7 @@ export default class ParkCard extends React.PureComponent {
             type="button"
             className="btn btn-warning m-2"
             onClick={e => this.props.planNewVisit(this.props.park)}>Plan New Visit</Button>
-
+            
         </Card>
       </div>
     )
