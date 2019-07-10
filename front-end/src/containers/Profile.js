@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
-import ParkCard from '../components/ParkCard'
+
+const URL = "http://localhost:3000/"
 
 export default class Profile extends Component {
   render() {
@@ -16,11 +17,6 @@ export default class Profile extends Component {
                   Welcome to your National Parks Explorer profile!
             </Card.Text>
               </Card.Body>
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>National Parks Visited:
-                </ListGroupItem>
-                <ListGroupItem>National Parks Planned To Visit:</ListGroupItem>
-              </ListGroup>
 
               <Card.Body>
                 <Button variant="primary" type="submit" onClick={this.props.handleLogout}>
@@ -32,7 +28,6 @@ export default class Profile extends Component {
           </Col>
         </Row>
       </Container>
-    
     )
   }
 }

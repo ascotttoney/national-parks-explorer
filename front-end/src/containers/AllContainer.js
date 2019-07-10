@@ -48,16 +48,6 @@ export default class AllContainer extends Component {
     }
   }
 
-  getMyVisits = () => {
-    if (!localStorage.token) return null
-    return this.state.pastVisits.filter(visit => visit.id === this.state.user.id)
-  }
-
-  getMyFuture = () => {
-    if (!localStorage.token) return null
-    return this.state.futureVisits.filter(visit => visit.id === this.state.user.id)
-  }
-
   postVisit = (visit) => {
     let newVisit = visit
     newVisit['park_id'] = this.state.newVisit['park_id']
@@ -73,14 +63,11 @@ export default class AllContainer extends Component {
       .then(postVisit => {
         if (this.state.newVisit === "Future") {
           this.modalClose()
-          console.log(postVisit)
-          // let visits = [...this.state.futureVisits, postVisit]
-          // window.history.pushState({ url: '/future_visits' }, '', '/future_visits')
-          // this.setState({ futureVisits: visits, redirect: <Redirect to='/future_visits' /> })
+          let visits = [...this.state.futureVisits, postVisit]
+          this.setState({ futureVisits: visits, redirect: <Redirect to='/future_visits' /> })
         } else {
           this.modalClose()
           let visits = [...this.state.pastVisits, postVisit]
-          console.log(visits)
           this.setState({ pastVisits: visits, redirect: <Redirect to='/past_visits' /> })
         }
       })
@@ -226,7 +213,7 @@ export default class AllContainer extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.message) {
+        if (data.errors) {
           alert("Sorry, your username or password is incorrect.")
           this.setState({ errors: data.message }, () => console.log("errors", this.state.errors))
         }
@@ -313,10 +300,9 @@ export default class AllContainer extends Component {
 
               <Route path="/profile" render={() => (
                 <Profile
+                  parks={this.state.user.parks}
                   user={this.state.user}
-                  handleLogout={this.handleLogout}
-                  pastVisits={this.getMyVisits()}
-                  futureVisits={this.getMyFuture()} />
+                  handleLogout={this.handleLogout} />
               )} />
 
               <Route component={NoMatch} />

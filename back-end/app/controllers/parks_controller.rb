@@ -3,11 +3,12 @@
 class ParksController < ApplicationController
   def show
     park = Park.find(params[:id])
-    render json: park, status: :ok
+    render json: ParkSerializer.new(park), status: :ok
   end
 
   def index
     parks = Park.national_parks
+    parks = parks.map
     render json: parks, status: :ok
   end
 
