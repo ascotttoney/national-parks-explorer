@@ -7,6 +7,8 @@ export const PastVisit = (props) => {
   return (
     <Container>
       {props.pastVisits.map(visit => {
+        const img = visit.park.park_images[Math.floor(Math.random() * visit.park.park_images.length)]
+
         return (
           <Row className="pt-3 pb-3 justify-content-md-center">
           <Col md={9}>
@@ -24,12 +26,12 @@ export const PastVisit = (props) => {
                 <h4>{ `When: ${visit.season} ${visit.year}` }</h4>
                 <p>{ visit.description }</p>
               </Card.Body>
-
+      
               <Card.Img
-                className='p-2'
-                variant='bottom'
-                style={{ maxHeight: '20%', borderRadius: '10px' }}
-                src={ visit.park.park_images[0].url }
+                  className='p-2'
+                  variant='bottom'
+                  style={{ maxHeight: '20rem', borderRadius: '10px' }}
+                  src={ img.url }
               />
             </Card>
           </Col>
