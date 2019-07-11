@@ -2,7 +2,6 @@ import React from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
 import styled from 'styled-components'
 import { GiDandelionFlower } from 'react-icons/gi'
-import Profile from './Profile'
 
 const Styles = styled.div`
   .navbar{
@@ -30,7 +29,7 @@ export const NavigationBar = (props) => (
           {localStorage.token ? <Nav.Item><Nav.Link href="/past_visits">Past Visits</Nav.Link></Nav.Item> : null}
         </Nav>
       </Navbar.Collapse>
-  
+
       {localStorage.token ?
         <Nav className="ml-auto">
           <Nav.Item><Nav.Link name='profile' href="/profile">Profile</Nav.Link></Nav.Item>

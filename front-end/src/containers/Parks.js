@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Card, CardColumns, Button, Image } from 'react-bootstrap'
+import { Container, Row, CardColumns, Image } from 'react-bootstrap'
 import ParkCard from '../components/ParkCard'
 import logo from '../components/mod-4-project-logo.png'
 
@@ -26,7 +26,7 @@ export default class ParksContainer extends Component {
               })}
             </div>
           </CardColumns>
-          
+
         </Container>
       </div>
     )

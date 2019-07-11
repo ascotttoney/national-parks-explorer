@@ -27,24 +27,7 @@ export default class AllContainer extends Component {
       pastVisits: [],
       futureVisits: [],
       search: "",
-      user: {
-        id: "",
-        userName: "",
-        firstName: "",
-        lastName: "",
-        profilePicture: "",
-        errors: ""
-      },
-      newUser: {
-        userName: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        profilePicture: "",
-        errors: "",
-        myPastVisits: [],
-        myFutureVisits: []
-      },
+      user: {},
       signUpForm: false
     }
   }
@@ -54,8 +37,6 @@ export default class AllContainer extends Component {
     newVisit['park_id'] = this.state.newVisit['park_id']
     newVisit['user_id'] = this.state.user['id']
     let url = URL + this.state.newVisitState.toLowerCase() + '_visits'
-
-    console.log(JSON.stringify({ visit: newVisit }));
 
     fetch(url, {
       method: 'POST',
@@ -105,7 +86,7 @@ export default class AllContainer extends Component {
     fetch(URL + 'parks')
       .then(res => res.json())
       .then(parks => this.setState({ parks: parks })
-      )
+    )
   }
 
   fetchVisits() {
@@ -137,26 +118,21 @@ export default class AllContainer extends Component {
     let token = localStorage.token
     fetch(`http://localhost:3000/profile`, {
       method: 'GET',
-      headers: { Authorization: token }
-    })
+      headers: { Authorization: token } })
       .then(res => res.json())
       .then(data => this.setState({ user: data.user })
-      )
+    )
   }
 
 
   // LOGIN & LOGOUT //
 
-  handleUserInputChange = (key, value) => {
-    this.setState({ user: { ...this.state.user, [key]: value } })
-  }
-
   handleLogin = (e) => {
     e.preventDefault()
 
     let userObject = {
-      userName: this.state.user.userName,
-      password: this.state.user.password
+      userName: e.target.userName.value,
+      password: e.target.password.value
     }
 
     fetch(URL + 'login', {
@@ -177,7 +153,7 @@ export default class AllContainer extends Component {
           this.forceUpdate()
         }
       })
-    e.target.parentElement.reset()
+    e.target.reset()
   }
 
   handleLogout = () => {
@@ -188,17 +164,22 @@ export default class AllContainer extends Component {
 
   // NEW USER STUFF //
 
-  handleNewUserInput = (key, value) => {
-    this.setState({ newUser: { ...this.state.newUser, [key]: value } })
-  }
-
   handleCreateUser = (e) => {
     e.preventDefault()
+    console.log(e.target)
+
+    let newUserObject = {
+      userName: e.target.userName.value,
+      password: e.target.password.value,
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      profilePicture: e.target.profilePicture.value
+    }
 
     fetch(URL + 'users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user: this.state.newUser })
+      body: JSON.stringify({ user: newUserObject })
     })
       .then(res => res.json())
       .then(data => {
@@ -219,6 +200,7 @@ export default class AllContainer extends Component {
     e.preventDefault()
     this.state.signUpForm ? this.setState({ signUpForm: false }) : this.setState({ signUpForm: true })
   }
+
 
   // RENDER & ROUTES //
 
@@ -278,11 +260,9 @@ export default class AllContainer extends Component {
 
               <Route path="/login" render={() => (
                 <Login
-                  handleUserInputChange={this.handleUserInputChange}
                   handleLogin={this.handleLogin}
                   handleLogout={this.handleLogout}
                   handleCreateUser={this.handleCreateUser}
-                  handleNewUserInput={this.handleNewUserInput}
                   showSignUpForm={this.showSignUpForm}
                   signUpForm={this.state.signUpForm} />
               )} />

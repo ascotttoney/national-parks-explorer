@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 
 export default class Profile extends Component {
   render() {
@@ -8,7 +8,7 @@ export default class Profile extends Component {
         <Row className="pt-3 pb-5 justify-content-md-center">
           <Col md={8}>
             <Card>
-              <Card.Img style={{ width: '25%' }} variant="right" src={this.props.user.profilePicture} roundedCircle />
+              <Card.Img style={{ width: '25%' }} variant="right" src={this.props.user.profilePicture} />
               <Card.Body>
                 <Card.Title>Hello, {this.props.user.firstName}!</Card.Title>
                 <Card.Text>

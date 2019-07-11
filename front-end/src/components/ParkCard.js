@@ -1,6 +1,6 @@
 import React from 'react'
 import { GiDirectionSign } from 'react-icons/gi'
-import { Container, Card, CardColumns, Button, Image } from 'react-bootstrap'
+import { Card, Button, Image } from 'react-bootstrap'
 
 export default class ParkCard extends React.PureComponent {
   render() {
