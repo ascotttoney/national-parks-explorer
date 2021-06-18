@@ -2,8 +2,6 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import Gallery from 'react-awesome-slider';
 import styles from '../galleryStyles.scss';
-import { FaMap } from 'react-icons/fa';
-import { GiPineTree } from 'react-icons/gi';
 
 export const ParkDetails = (props) => {
 	const { url, fullname, states, description, weatherInfo, park_images } =
@@ -12,12 +10,9 @@ export const ParkDetails = (props) => {
 		<div className="container">
 			<div className="page-header">
 				<h1 className="text-center">
-					<GiPineTree />
 					<a href={url} target="_blank" rel="noopener noreferrer">
-						{' '}
 						{fullname}
-					</a>{' '}
-					<GiPineTree />
+					</a>
 				</h1>
 			</div>
 
@@ -28,9 +23,7 @@ export const ParkDetails = (props) => {
 			</Gallery>
 
 			<div className="pt-4 text-dark">
-				<h6>
-					<FaMap /> {states}
-				</h6>
+				<h6>{states}</h6>
 				<p>{description}</p>
 				<p>{weatherInfo}</p>
 

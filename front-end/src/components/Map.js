@@ -46,7 +46,7 @@ export const Map = (props) => {
 				>
 					<img
 						src="https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg"
-						alt="Park Logo"
+						alt="National Park Service Logo"
 					/>
 				</button>
 			</Marker>
