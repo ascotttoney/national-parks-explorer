@@ -1,74 +1,24 @@
-# National Parks Navigator
-### Models:
+# README
 
-#### Park: 
-##### Relationships
-* has_many :past_vists
-* has_many :past_vistors, through: :past_vists, class_name: "User"
-  
-* has_many :future_vists
-* has_many :future_vistors, through: :future_vists, class_name: "User"
-##### Columns
-* latLong: string,
-* name: string,
-* fullname: string,
-* parkCode: string,
-* states: string,
-* designation: string,
-* url: string,
-* description: text,
-* weatherInfo: string
-  
-* operatingHours?
-* entranceFees?
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-#### ParkImages
-##### Columns
-* park: references,
-* title: string,
-* altText: string,
-* url: string,
-* caption: string,
-* credit: string,
+Things you may want to cover:
 
-#### User:
-##### Relationships
-* has_many :past_vists
-* has_many :past_parks, through: :past_vists, class_name: "Park"
-  
-* has_many :future_vists
-* has_many :future_parks, through: :future_vists, class_name: "Park"
+* Ruby version
 
-##### Columns
-* userName: string,
-* password_digest: string,
-* firstName: string,
-* lastName: string,
-* profilePicture: string
+* System dependencies
 
-#### PastVisit:
-##### Relationships
-* belongs_to :user
-* belongs_to :park
-  
-##### Columns
-* user: references,
-* park: references,
-* title: string,
-* descriptoin: text,
-* season: string,
-* year: integer,
-  
-#### user_images?
+* Configuration
 
-#### FutureVisit
-##### Relationships
-* belongs_to :user
-* belongs_to :park
-##### Columns
-* user: references,
-* park: references,
-* title: string,
-* descriptoin: text,
-* season: string,
-* year: integer,
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
